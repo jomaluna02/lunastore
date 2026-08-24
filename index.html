@@ -260,7 +260,7 @@
       }
     ];
 
-    const numeroWhatsApp = "1234567890"; // Reemplazar por tu número real con código de país (ej. 573001234567)
+    const numeroWhatsApp = "1234567890"; // Reemplazar por tu número real
 
     function renderizarProductos(lista) {
       const contenedor = document.getElementById('grid-productos');
@@ -281,7 +281,6 @@
         ` : '';
 
         const specsHtml = prod.specs.map(spec => `<li>${spec}</li>`).join('');
-
         const meGustaMensaje = encodeURIComponent(`¡Hola! Me interesa comprar el producto: ${prod.nombre} (${prod.precio}).`);
 
         const card = document.createElement('div');
@@ -338,7 +337,6 @@
       }
     }
 
-    // Carga inicial de productos
     renderizarProductos(productos);
   </script>
 </body>
