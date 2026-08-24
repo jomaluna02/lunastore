@@ -236,6 +236,48 @@
     .folder-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-bottom: 2px; }
     .folder-price-tag { color: var(--accent-gold); font-weight: 700; font-size: 0.85rem; }
 
+    .coming-soon-card {
+      background: radial-gradient(circle at top, #2a2311, #141416 65%);
+    }
+
+    .coming-soon-card:hover { transform: none; border-color: var(--accent-gold); }
+
+    .coming-soon-visual {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--accent-gold);
+      text-align: center;
+      background: repeating-linear-gradient(135deg, rgba(212,175,55,0.08) 0 12px, transparent 12px 24px);
+    }
+
+    .coming-soon-visual i { font-size: 2.6rem; }
+    .coming-soon-visual strong { font-size: 1.25rem; letter-spacing: 2px; }
+    .coming-soon-visual small { color: #c9c0a0; font-weight: 800; letter-spacing: 3px; }
+
+    .empty-catalog {
+      grid-column: 1 / -1;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+      border: 1px dashed var(--accent-gold);
+      border-radius: 12px;
+      background: radial-gradient(circle at top, #2a2311, #141416 68%);
+      color: var(--accent-gold);
+    }
+
+    .empty-catalog i { font-size: 3rem; }
+    .empty-catalog h3 { font-size: 1.5rem; letter-spacing: 2px; }
+    .empty-catalog p { color: #c9c0a0; font-size: 0.9rem; }
+
     /* Product Grid */
     .product-grid {
       display: grid;
@@ -479,11 +521,15 @@
         <h2 class="section-title">CATEGORÍAS DESTACADAS</h2>
       </div>
       <div class="folder-grid">
-        <div class="folder-card" onclick="openCategory('gorras')">
-          <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80" class="folder-img">
+        <div class="folder-card coming-soon-card" onclick="openCategory('gorras')" role="button" aria-label="Ver categoría Gorras, próximamente disponible">
+          <div class="coming-soon-visual">
+            <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+            <strong>PRÓXIMAMENTE</strong>
+            <small>SOON...</small>
+          </div>
           <div class="folder-overlay">
             <div class="folder-title">Gorras</div>
-            <div class="folder-price-tag">Explorar Catálogo • $50.000</div>
+            <div class="folder-price-tag">Próximamente</div>
           </div>
         </div>
 
@@ -650,15 +696,6 @@
     // Datos de Productos
     const productos = [
       {
-        id: 1, categoria: 'gorras', nombre: 'Gorra LA Black Edition', precioNum: 50000, precio: '$50.000',
-        fotos: [
-          'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80',
-          'https://images.unsplash.com/photo-1575428652377-a2d80e2277fc?auto=format&fit=crop&w=600&q=80',
-          'https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=600&q=80'
-        ],
-        specs: ['Talla ajustable (Snapback)', 'Calidad Premium 1:1', 'Bordado de alta densidad', 'Bolsa protectora incluida']
-      },
-      {
         id: 2, categoria: 'gafas', nombre: 'Gafas Black Polarized', precioNum: 50000, precio: '$50.000',
         fotos: [
           'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80',
@@ -689,13 +726,27 @@
       document.getElementById('home-wrapper').style.display = 'none';
       document.getElementById('catalog-section').style.display = 'block';
       
-      const titleMap = { 'gorras': 'Gorras ($50.000)', 'gafas': 'Gafas ($50.000)', 'relojes': 'Relojes ($65.000)' };
+      const titleMap = { 'gorras': 'Gorras', 'gafas': 'Gafas', 'relojes': 'Relojes' };
       document.getElementById('current-category-title').innerText = titleMap[cat];
 
       const grid = document.getElementById('product-grid');
       grid.innerHTML = '';
 
       const filtrados = productos.filter(p => p.categoria === cat);
+
+      if (filtrados.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-catalog">
+            <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+            <h3>PRÓXIMAMENTE...</h3>
+            <p>Estamos preparando nuevos productos para esta categoría.</p>
+            <small>SOON...</small>
+          </div>
+        `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
       filtrados.forEach(prod => {
         const card = document.createElement('div');
         card.className = 'product-card';
