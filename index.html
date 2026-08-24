@@ -1,14 +1,233 @@
-// Datos de Productos (Actualizado con las dos nuevas gorras)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Accesorios</title>
+  <style>
+    :root {
+      --bg-color: #0d0f12;
+      --card-bg: #161a22;
+      --accent-color: #00e5ff;
+      --text-color: #f0f4f8;
+      --text-muted: #8b9bb4;
+      --border-color: #262c38;
+      --whatsapp-color: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding-bottom: 60px;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      color: var(--accent-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .filtros {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-filtro {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .btn-filtro:hover, .btn-filtro.activo {
+      background-color: var(--accent-color);
+      color: #000;
+      border-color: var(--accent-color);
+    }
+
+    .grid-productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 229, 255, 0.15);
+    }
+
+    .galeria {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .galeria img.activa {
+      display: block;
+    }
+
+    .controles-galeria {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 0.5rem;
+      pointer-events: none;
+    }
+
+    .btn-nav {
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: var(--accent-color);
+      color: #000;
+    }
+
+    .card-body {
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-precio {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    .card-specs {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-specs li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .card-specs li::before {
+      content: "•";
+      color: var(--accent-color);
+      position: absolute;
+      left: 0;
+    }
+
+    .btn-whatsapp {
+      background-color: var(--whatsapp-color);
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-whatsapp:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CATÁLOGO DE PRODUCTOS</h1>
+  </header>
+
+  <div class="container">
+    <div class="filtros">
+      <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos</button>
+      <button class="btn-filtro" onclick="filtrar('gorras', this)">Gorras</button>
+      <button class="btn-filtro" onclick="filtrar('gafas', this)">Gafas</button>
+      <button class="btn-filtro" onclick="filtrar('relojes', this)">Relojes</button>
+    </div>
+
+    <div class="grid-productos" id="grid-productos">
+      <!-- Los productos se cargan dinámicamente -->
+    </div>
+  </div>
+
+  <script>
     const productos = [
-      {
-        id: 1, categoria: 'gorras', nombre: 'Gorra LA Black Edition', precioNum: 50000, precio: '$50.000',
-        fotos: [
-          'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80',
-          'https://images.unsplash.com/photo-1575428652377-a2d80e2277fc?auto=format&fit=crop&w=600&q=80',
-          'https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=600&q=80'
-        ],
-        specs: ['Talla ajustable (Snapback)', 'Calidad Premium 1:1', 'Bordado de alta densidad', 'Bolsa protectora incluida']
-      },
       {
         id: 2, categoria: 'gafas', nombre: 'Gafas Black Polarized', precioNum: 50000, precio: '$50.000',
         fotos: [
@@ -26,7 +245,7 @@
         specs: ['Movimiento de precisión', 'Incluye caja de lujo', 'Resistente a salpicaduras']
       },
       {
-        id: 4, categoria: 'gorras', nombre: 'Gorrin Bros', precioNum: 55000, precio: '$55.000',
+        id: 4, categoria: 'gorras', nombre: 'Goorin Bros', precioNum: 55000, precio: '$55.000',
         fotos: [
           'image_4.png'
         ],
@@ -40,4 +259,87 @@
         specs: ['Calidad Premium 1:1', 'Bordado frontal Los Angeles (LA)', 'Malla trasera de ventilación', 'Talla ajustable']
       }
     ];
-    
+
+    const numeroWhatsApp = "1234567890"; // Reemplazar por tu número real con código de país (ej. 573001234567)
+
+    function renderizarProductos(lista) {
+      const contenedor = document.getElementById('grid-productos');
+      contenedor.innerHTML = '';
+
+      lista.forEach(prod => {
+        const tieneVariasFotos = prod.fotos.length > 1;
+
+        const imgsHtml = prod.fotos.map((foto, index) => 
+          `<img src="${foto}" class="${index === 0 ? 'activa' : ''}" data-index="${index}" alt="${prod.nombre}">`
+        ).join('');
+
+        const controlesHtml = tieneVariasFotos ? `
+          <div class="controles-galeria">
+            <button class="btn-nav" onclick="cambiarFoto(${prod.id}, -1)">&#10094;</button>
+            <button class="btn-nav" onclick="cambiarFoto(${prod.id}, 1)">&#10095;</button>
+          </div>
+        ` : '';
+
+        const specsHtml = prod.specs.map(spec => `<li>${spec}</li>`).join('');
+
+        const meGustaMensaje = encodeURIComponent(`¡Hola! Me interesa comprar el producto: ${prod.nombre} (${prod.precio}).`);
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.id = `prod-${prod.id}`;
+        card.innerHTML = `
+          <div class="galeria">
+            ${imgsHtml}
+            ${controlesHtml}
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">${prod.nombre}</h2>
+            <div class="card-precio">${prod.precio}</div>
+            <ul class="card-specs">
+              ${specsHtml}
+            </ul>
+            <a href="https://wa.me/${numeroWhatsApp}?text=${meGustaMensaje}" target="_blank" class="btn-whatsapp">
+              Comprar por WhatsApp
+            </a>
+          </div>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+
+    function cambiarFoto(idProducto, direccion) {
+      const card = document.getElementById(`prod-${idProducto}`);
+      const imagenes = card.querySelectorAll('.galeria img');
+      let indiceActivo = 0;
+
+      imagenes.forEach((img, index) => {
+        if (img.classList.contains('activa')) {
+          indiceActivo = index;
+          img.classList.remove('activa');
+        }
+      });
+
+      let nuevoIndice = indiceActivo + direccion;
+      if (nuevoIndice < 0) nuevoIndice = imagenes.length - 1;
+      if (nuevoIndice >= imagenes.length) nuevoIndice = 0;
+
+      imagenes[nuevoIndice].classList.add('activa');
+    }
+
+    function filtrar(categoria, boton) {
+      document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
+      boton.classList.add('activo');
+
+      if (categoria === 'todos') {
+        renderizarProductos(productos);
+      } else {
+        const filtrados = productos.filter(p => p.categoria === categoria);
+        renderizarProductos(filtrados);
+      }
+    }
+
+    // Carga inicial de productos
+    renderizarProductos(productos);
+  </script>
+</body>
+</html>
