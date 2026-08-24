@@ -50,31 +50,6 @@
       padding: 0 1rem;
     }
 
-    .filtros {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-filtro {
-      background-color: var(--card-bg);
-      color: var(--text-color);
-      border: 1px solid var(--border-color);
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-
-    .btn-filtro:hover, .btn-filtro.activo {
-      background-color: var(--accent-color);
-      color: #000;
-      border-color: var(--accent-color);
-    }
-
     .grid-productos {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -97,54 +72,16 @@
     }
 
     .galeria {
-      position: relative;
       width: 100%;
       height: 250px;
       background-color: #000;
-      overflow: hidden;
     }
 
     .galeria img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: none;
-    }
-
-    .galeria img.activa {
       display: block;
-    }
-
-    .controles-galeria {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-      padding: 0 0.5rem;
-      pointer-events: none;
-    }
-
-    .btn-nav {
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      pointer-events: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
-
-    .btn-nav:hover {
-      background: var(--accent-color);
-      color: #000;
     }
 
     .card-body {
@@ -198,7 +135,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
       transition: opacity 0.3s ease;
     }
 
@@ -214,130 +150,88 @@
   </header>
 
   <div class="container">
-    <div class="filtros">
-      <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos</button>
-      <button class="btn-filtro" onclick="filtrar('gorras', this)">Gorras</button>
-      <button class="btn-filtro" onclick="filtrar('gafas', this)">Gafas</button>
-      <button class="btn-filtro" onclick="filtrar('relojes', this)">Relojes</button>
-    </div>
+    <div class="grid-productos">
+      
+      <!-- Producto 1: Gafas -->
+      <div class="card">
+        <div class="galeria">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" alt="Gafas Black Polarized">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Gafas Black Polarized</h2>
+          <div class="card-precio">$50.000</div>
+          <ul class="card-specs">
+            <li>Protección UV400</li>
+            <li>Lentes polarizados anti-reflejo</li>
+            <li>Incluye estuche rígido y paño</li>
+          </ul>
+          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20las%20Gafas%20Black%20Polarized%20($50.000)" target="_blank" class="btn-whatsapp">
+            Comprar por WhatsApp
+          </a>
+        </div>
+      </div>
 
-    <div class="grid-productos" id="grid-productos">
-      <!-- Los productos se cargan dinámicamente -->
+      <!-- Producto 2: Reloj -->
+      <div class="card">
+        <div class="galeria">
+          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80" alt="Reloj Luxury Black Steel">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Reloj Luxury Black Steel</h2>
+          <div class="card-precio">$65.000</div>
+          <ul class="card-specs">
+            <li>Movimiento de precisión</li>
+            <li>Incluye caja de lujo</li>
+            <li>Resistente a salpicaduras</li>
+          </ul>
+          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20el%20Reloj%20Luxury%20Black%20Steel%20($65.000)" target="_blank" class="btn-whatsapp">
+            Comprar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Producto 3: Goorin Bros -->
+      <div class="card">
+        <div class="galeria">
+          <img src="image_4.png" alt="Gorra Goorin Bros">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Goorin Bros</h2>
+          <div class="card-precio">$55.000</div>
+          <ul class="card-specs">
+            <li>Calidad Premium 1:1</li>
+            <li>Estilo Trucker con malla trasera</li>
+            <li>Parche frontal Panther bordado</li>
+            <li>Broche de presión ajustable</li>
+          </ul>
+          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20la%20gorra%20Goorin%20Bros%20($55.000)" target="_blank" class="btn-whatsapp">
+            Comprar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Producto 4: Beisbolera -->
+      <div class="card">
+        <div class="galeria">
+          <img src="image_3.png" alt="Gorra Beisbolera">
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Beisbolera</h2>
+          <div class="card-precio">$47.000</div>
+          <ul class="card-specs">
+            <li>Calidad Premium 1:1</li>
+            <li>Bordado frontal Los Angeles (LA)</li>
+            <li>Malla trasera de ventilación</li>
+            <li>Talla ajustable</li>
+          </ul>
+          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20la%20gorra%20Beisbolera%20($47.000)" target="_blank" class="btn-whatsapp">
+            Comprar por WhatsApp
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <script>
-    const productos = [
-      {
-        id: 2, categoria: 'gafas', nombre: 'Gafas Black Polarized', precioNum: 50000, precio: '$50.000',
-        fotos: [
-          'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80',
-          'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80'
-        ],
-        specs: ['Protección UV400', 'Lentes polarizados anti-reflejo', 'Incluye estuche rígido y paño']
-      },
-      {
-        id: 3, categoria: 'relojes', nombre: 'Reloj Luxury Black Steel', precioNum: 65000, precio: '$65.000',
-        fotos: [
-          'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80',
-          'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80'
-        ],
-        specs: ['Movimiento de precisión', 'Incluye caja de lujo', 'Resistente a salpicaduras']
-      },
-      {
-        id: 4, categoria: 'gorras', nombre: 'Goorin Bros', precioNum: 55000, precio: '$55.000',
-        fotos: [
-          'image_4.png'
-        ],
-        specs: ['Calidad Premium 1:1', 'Estilo Trucker con malla trasera', 'Parche frontal Panther bordado', 'Broche de presión ajustable']
-      },
-      {
-        id: 5, categoria: 'gorras', nombre: 'Beisbolera', precioNum: 47000, precio: '$47.000',
-        fotos: [
-          'image_3.png'
-        ],
-        specs: ['Calidad Premium 1:1', 'Bordado frontal Los Angeles (LA)', 'Malla trasera de ventilación', 'Talla ajustable']
-      }
-    ];
-
-    const numeroWhatsApp = "1234567890"; // Reemplazar por tu número real
-
-    function renderizarProductos(lista) {
-      const contenedor = document.getElementById('grid-productos');
-      contenedor.innerHTML = '';
-
-      lista.forEach(prod => {
-        const tieneVariasFotos = prod.fotos.length > 1;
-
-        const imgsHtml = prod.fotos.map((foto, index) => 
-          `<img src="${foto}" class="${index === 0 ? 'activa' : ''}" data-index="${index}" alt="${prod.nombre}">`
-        ).join('');
-
-        const controlesHtml = tieneVariasFotos ? `
-          <div class="controles-galeria">
-            <button class="btn-nav" onclick="cambiarFoto(${prod.id}, -1)">&#10094;</button>
-            <button class="btn-nav" onclick="cambiarFoto(${prod.id}, 1)">&#10095;</button>
-          </div>
-        ` : '';
-
-        const specsHtml = prod.specs.map(spec => `<li>${spec}</li>`).join('');
-        const meGustaMensaje = encodeURIComponent(`¡Hola! Me interesa comprar el producto: ${prod.nombre} (${prod.precio}).`);
-
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.id = `prod-${prod.id}`;
-        card.innerHTML = `
-          <div class="galeria">
-            ${imgsHtml}
-            ${controlesHtml}
-          </div>
-          <div class="card-body">
-            <h2 class="card-title">${prod.nombre}</h2>
-            <div class="card-precio">${prod.precio}</div>
-            <ul class="card-specs">
-              ${specsHtml}
-            </ul>
-            <a href="https://wa.me/${numeroWhatsApp}?text=${meGustaMensaje}" target="_blank" class="btn-whatsapp">
-              Comprar por WhatsApp
-            </a>
-          </div>
-        `;
-        contenedor.appendChild(card);
-      });
-    }
-
-    function cambiarFoto(idProducto, direccion) {
-      const card = document.getElementById(`prod-${idProducto}`);
-      const imagenes = card.querySelectorAll('.galeria img');
-      let indiceActivo = 0;
-
-      imagenes.forEach((img, index) => {
-        if (img.classList.contains('activa')) {
-          indiceActivo = index;
-          img.classList.remove('activa');
-        }
-      });
-
-      let nuevoIndice = indiceActivo + direccion;
-      if (nuevoIndice < 0) nuevoIndice = imagenes.length - 1;
-      if (nuevoIndice >= imagenes.length) nuevoIndice = 0;
-
-      imagenes[nuevoIndice].classList.add('activa');
-    }
-
-    function filtrar(categoria, boton) {
-      document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
-      boton.classList.add('activo');
-
-      if (categoria === 'todos') {
-        renderizarProductos(productos);
-      } else {
-        const filtrados = productos.filter(p => p.categoria === categoria);
-        renderizarProductos(filtrados);
-      }
-    }
-
-    renderizarProductos(productos);
-  </script>
 </body>
 </html>
