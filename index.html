@@ -3,235 +3,827 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda de Accesorios</title>
+  <title>LUNA CAPSTORE | Tienda Oficial</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg-color: #0d0f12;
-      --card-bg: #161a22;
-      --accent-color: #00e5ff;
-      --text-color: #f0f4f8;
-      --text-muted: #8b9bb4;
-      --border-color: #262c38;
-      --whatsapp-color: #25d366;
+      --bg-dark: #0a0a0a;
+      --accent-gold: #d4af37;
+      --accent-gold-hover: #b89528;
+      --whatsapp-green: #25d366;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      padding-bottom: 60px;
+      background-color: #0f0f11;
+      color: #fff;
+      line-height: 1.5;
     }
 
+    /* Top Bar */
+    .top-bar {
+      background-color: #000;
+      color: var(--accent-gold);
+      font-size: 0.78rem;
+      padding: 8px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1a1a1a;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .top-bar div { display: flex; align-items: center; gap: 6px; }
+
+    /* Header */
     header {
-      background-color: var(--card-bg);
-      border-bottom: 1px solid var(--border-color);
-      padding: 1.5rem 2rem;
-      text-align: center;
+      background-color: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 0.8rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
+      border-bottom: 1px solid #222;
     }
 
-    header h1 {
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-      color: var(--accent-color);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    .grid-productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 229, 255, 0.15);
-    }
-
-    .galeria {
-      width: 100%;
-      height: 250px;
-      background-color: #000;
-    }
-
-    .galeria img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-body {
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .card-title {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-precio {
+    .logo {
       font-size: 1.4rem;
-      font-weight: bold;
-      color: var(--accent-color);
-      margin-bottom: 1rem;
-    }
-
-    .card-specs {
-      list-style: none;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
-    }
-
-    .card-specs li {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .card-specs li::before {
-      content: "•";
-      color: var(--accent-color);
-      position: absolute;
-      left: 0;
-    }
-
-    .btn-whatsapp {
-      background-color: var(--whatsapp-color);
+      font-weight: 900;
+      letter-spacing: 2px;
       color: #fff;
-      text-decoration: none;
-      text-align: center;
-      padding: 0.8rem;
-      border-radius: 8px;
-      font-weight: bold;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .logo span { color: var(--accent-gold); }
+
+    nav { display: flex; gap: 20px; }
+    nav a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: color 0.2s; }
+    nav a:hover { color: var(--accent-gold); }
+
+    .cart-icon-btn {
+      position: relative;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: var(--accent-gold);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.3s ease;
     }
 
-    .btn-whatsapp:hover {
-      opacity: 0.9;
+    /* Hero Main Banner Compacto */
+    .hero {
+      position: relative;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      padding: 0 8%;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.8s ease-in-out;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.85) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 550px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag { color: var(--accent-gold); font-size: 0.8rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 6px; }
+    .hero h1 { font-size: 2.2rem; font-weight: 900; line-height: 1.15; margin-bottom: 10px; text-transform: uppercase; }
+    .hero p { color: #ccc; font-size: 0.9rem; margin-bottom: 20px; }
+
+    .btn-gold {
+      display: inline-block;
+      background-color: var(--accent-gold);
+      color: #000;
+      padding: 10px 24px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .btn-gold:hover { background-color: var(--accent-gold-hover); transform: translateY(-2px); }
+
+    /* Controles Carrusel */
+    .hero-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active { background: var(--accent-gold); }
+
+    /* Features Bar */
+    .features-bar {
+      background-color: #000;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 15px 8%;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .feature-item { display: flex; align-items: center; gap: 12px; }
+    .feature-item i { font-size: 1.5rem; color: var(--accent-gold); }
+    .feature-item h4 { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; }
+    .feature-item p { font-size: 0.72rem; color: #888; }
+
+    /* Container & Folders */
+    .container { max-width: 1300px; margin: 35px auto; padding: 0 20px; }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+
+    .folder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .folder-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 260px;
+      cursor: pointer;
+      border: 1px solid #222;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .folder-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+    }
+
+    .folder-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .folder-card:hover .folder-img { transform: scale(1.08); }
+
+    .folder-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 80%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .folder-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-bottom: 2px; }
+    .folder-price-tag { color: var(--accent-gold); font-weight: 700; font-size: 0.85rem; }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: #141416;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #222;
+      transition: transform 0.3s, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-gold);
+    }
+
+    .product-img-wrapper { position: relative; height: 240px; background: #000; cursor: pointer; }
+    .product-img { width: 100%; height: 100%; object-fit: cover; }
+
+    .product-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+    .product-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; color: #fff; cursor: pointer; }
+    .product-price { font-size: 1.2rem; font-weight: 900; color: var(--accent-gold); margin-bottom: 12px; }
+
+    .card-actions { margin-top: auto; display: flex; gap: 8px; }
+
+    .btn-detail {
+      flex: 1;
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .btn-add-cart {
+      flex: 1;
+      background: var(--accent-gold);
+      color: #000;
+      border: none;
+      padding: 8px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: #141416;
+      color: #fff;
+      border-radius: 12px;
+      max-width: 850px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      padding: 25px;
+      border: 1px solid #333;
+    }
+
+    .close-modal { position: absolute; top: 12px; right: 18px; font-size: 1.6rem; cursor: pointer; color: #aaa; }
+    .main-modal-img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
+    .thumbs-grid { display: flex; gap: 8px; margin-top: 10px; }
+    .thumb-img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; }
+    .thumb-img.active { border-color: var(--accent-gold); }
+
+    .shipping-info-box { background: #1f1f22; padding: 10px; border-radius: 6px; font-size: 0.8rem; color: #ccc; margin: 12px 0; border-left: 3px solid var(--accent-gold); }
+
+    /* Cart Modal */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2500;
+      justify-content: flex-end;
+    }
+
+    .cart-modal.active { display: flex; }
+
+    .cart-content {
+      background: #141416;
+      color: #fff;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-header { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding-bottom: 12px; margin-bottom: 15px; }
+    .cart-items-list { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .cart-item { display: flex; gap: 10px; align-items: center; border-bottom: 1px solid #222; padding-bottom: 8px; }
+    .cart-item-img { width: 55px; height: 55px; object-fit: cover; border-radius: 6px; }
+
+    .btn-checkout-wa {
+      display: block;
+      width: 100%;
+      background: var(--whatsapp-green);
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-weight: 800;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .wa-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--whatsapp-green);
+      color: white;
+      border-radius: 50px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      z-index: 999;
+    }
+
+    footer { background: #000; text-align: center; padding: 20px; font-size: 0.8rem; color: #666; border-top: 1px solid #1a1a1a; margin-top: 40px; }
+    footer span { color: var(--accent-gold); }
+
+    @media(max-width: 768px) {
+      .hero { height: 300px; }
+      .hero h1 { font-size: 1.6rem; }
+      .modal-content { grid-template-columns: 1fr; }
+      nav { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div><i class="fa-solid fa-truck-fast"></i> Envíos GRATIS en Bucaramanga</div>
+    <div><i class="fa-solid fa-hand-holding-dollar"></i> Pago CONTRAENTREGA fuera del país</div>
+    <div><i class="fa-solid fa-headset"></i> ¿Dudas? Escríbenos al WhatsApp</div>
+  </div>
+
+  <!-- Header -->
   <header>
-    <h1>CATÁLOGO DE PRODUCTOS</h1>
+    <div class="logo" onclick="showHomeView()">
+      <i class="fa-solid fa-moon"></i> LUNA <span>CAPSTORE</span>
+    </div>
+    <nav>
+      <a onclick="showHomeView()">Inicio</a>
+      <a onclick="openCategory('gorras')">Gorras</a>
+      <a onclick="openCategory('gafas')">Gafas</a>
+      <a onclick="openCategory('relojes')">Relojes</a>
+    </nav>
+    <div class="header-icons">
+      <button class="cart-icon-btn" onclick="toggleCartModal()">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cart-count">0</span>
+      </button>
+    </div>
   </header>
 
-  <div class="container">
-    <div class="grid-productos">
-      
-      <!-- Producto 1: Gafas -->
-      <div class="card">
-        <div class="galeria">
-          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" alt="Gafas Black Polarized">
-        </div>
-        <div class="card-body">
-          <h2 class="card-title">Gafas Black Polarized</h2>
-          <div class="card-precio">$50.000</div>
-          <ul class="card-specs">
-            <li>Protección UV400</li>
-            <li>Lentes polarizados anti-reflejo</li>
-            <li>Incluye estuche rígido y paño</li>
-          </ul>
-          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20las%20Gafas%20Black%20Polarized%20($50.000)" target="_blank" class="btn-whatsapp">
-            Comprar por WhatsApp
-          </a>
+  <!-- SECCIÓN INICIO (Se oculta al entrar a una carpeta) -->
+  <div id="home-wrapper">
+    <!-- Hero Slider -->
+    <section class="hero" id="hero-slider">
+      <div class="hero-overlay"></div>
+      <div class="hero-content" id="hero-content">
+        <div class="hero-tag" id="slide-tag">NUEVA COLECCIÓN</div>
+        <h1 id="slide-title">ELEVA TU ESTILO LUNA CAPSTORE</h1>
+        <p id="slide-desc">Gorras, gafas y relojes con acabados de primera clase.</p>
+        <a href="#carpetas" class="btn-gold">EXPLORAR COLECCIONES <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="hero-dots" id="hero-dots"></div>
+    </section>
+
+    <!-- Features Bar -->
+    <div class="features-bar">
+      <div class="feature-item">
+        <i class="fa-solid fa-truck-ramp-box"></i>
+        <div>
+          <h4>Envíos Rápidos</h4>
+          <p>Gratis en Bucaramanga</p>
         </div>
       </div>
-
-      <!-- Producto 2: Reloj -->
-      <div class="card">
-        <div class="galeria">
-          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80" alt="Reloj Luxury Black Steel">
-        </div>
-        <div class="card-body">
-          <h2 class="card-title">Reloj Luxury Black Steel</h2>
-          <div class="card-precio">$65.000</div>
-          <ul class="card-specs">
-            <li>Movimiento de precisión</li>
-            <li>Incluye caja de lujo</li>
-            <li>Resistente a salpicaduras</li>
-          </ul>
-          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20el%20Reloj%20Luxury%20Black%20Steel%20($65.000)" target="_blank" class="btn-whatsapp">
-            Comprar por WhatsApp
-          </a>
+      <div class="feature-item">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <h4>Pago Contraentrega</h4>
+          <p>Paga al recibir tu pedido</p>
         </div>
       </div>
-
-      <!-- Producto 3: Goorin Bros -->
-      <div class="card">
-        <div class="galeria">
-          <img src="image_4.png" alt="Gorra Goorin Bros">
-        </div>
-        <div class="card-body">
-          <h2 class="card-title">Goorin Bros</h2>
-          <div class="card-precio">$55.000</div>
-          <ul class="card-specs">
-            <li>Calidad Premium 1:1</li>
-            <li>Estilo Trucker con malla trasera</li>
-            <li>Parche frontal Panther bordado</li>
-            <li>Broche de presión ajustable</li>
-          </ul>
-          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20la%20gorra%20Goorin%20Bros%20($55.000)" target="_blank" class="btn-whatsapp">
-            Comprar por WhatsApp
-          </a>
+      <div class="feature-item">
+        <i class="fa-solid fa-gem"></i>
+        <div>
+          <h4>Calidad Premium</h4>
+          <p>Materiales seleccionados</p>
         </div>
       </div>
-
-      <!-- Producto 4: Beisbolera -->
-      <div class="card">
-        <div class="galeria">
-          <img src="image_3.png" alt="Gorra Beisbolera">
-        </div>
-        <div class="card-body">
-          <h2 class="card-title">Beisbolera</h2>
-          <div class="card-precio">$47.000</div>
-          <ul class="card-specs">
-            <li>Calidad Premium 1:1</li>
-            <li>Bordado frontal Los Angeles (LA)</li>
-            <li>Malla trasera de ventilación</li>
-            <li>Talla ajustable</li>
-          </ul>
-          <a href="https://wa.me/573001234567?text=%C2%A1Hola!%20Me%20interesa%20comprar%20la%20gorra%20Beisbolera%20($47.000)" target="_blank" class="btn-whatsapp">
-            Comprar por WhatsApp
-          </a>
+      <div class="feature-item">
+        <i class="fa-solid fa-comments"></i>
+        <div>
+          <h4>Atención Directa</h4>
+          <p>WhatsApp +57 3106552315</p>
         </div>
       </div>
+    </div>
 
+    <!-- Carpetas / Categorías -->
+    <section class="container" id="carpetas">
+      <div class="section-header">
+        <h2 class="section-title">CATEGORÍAS DESTACADAS</h2>
+      </div>
+      <div class="folder-grid">
+        <div class="folder-card" onclick="openCategory('gorras')">
+          <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80" class="folder-img">
+          <div class="folder-overlay">
+            <div class="folder-title">Gorras</div>
+            <div class="folder-price-tag">Explorar Catálogo • $50.000</div>
+          </div>
+        </div>
+
+        <div class="folder-card" onclick="openCategory('gafas')">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" class="folder-img">
+          <div class="folder-overlay">
+            <div class="folder-title">Gafas</div>
+            <div class="folder-price-tag">Explorar Catálogo • $50.000</div>
+          </div>
+        </div>
+
+        <div class="folder-card" onclick="openCategory('relojes')">
+          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80" class="folder-img">
+          <div class="folder-overlay">
+            <div class="folder-title">Relojes</div>
+            <div class="folder-price-tag">Explorar Catálogo • $65.000</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Catálogo de Productos (Solo visible dentro de una categoría) -->
+  <main class="container" id="catalog-section" style="display: none;">
+    <div class="section-header">
+      <h2 class="section-title" id="current-category-title">Gorras</h2>
+      <button class="btn-detail" onclick="showHomeView()"><i class="fa-solid fa-arrow-left"></i> Volver al Inicio</button>
+    </div>
+    <div class="product-grid" id="product-grid"></div>
+  </main>
+
+  <!-- Modal Detalle del Producto -->
+  <div class="modal" id="product-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeProductModal()">&times;</span>
+      <div>
+        <img id="modal-main-img" class="main-modal-img" src="" alt="Producto">
+        <div class="thumbs-grid" id="modal-thumbs"></div>
+      </div>
+      <div>
+        <h2 id="modal-title" style="font-size: 1.5rem; margin-bottom: 6px;"></h2>
+        <div id="modal-price" style="font-size: 1.6rem; font-weight: 900; color: var(--accent-gold); margin-bottom: 10px;"></div>
+        <div class="shipping-info-box">
+          <p><i class="fa-solid fa-truck"></i> Tiempos de entrega: <strong>2 a 5 días hábiles</strong>.</p>
+          <p><i class="fa-solid fa-circle-check"></i> Envíos <strong>GRATIS</strong> en Bucaramanga y pago <strong>CONTRAENTREGA</strong>.</p>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <h4 style="text-transform: uppercase; font-size: 0.8rem; color: #888; margin-bottom: 6px;">Características:</h4>
+          <ul id="modal-specs" style="list-style-position: inside; font-size: 0.8rem; color: #ccc;"></ul>
+        </div>
+        <button class="btn-gold" style="width: 100%; border: none; cursor: pointer;" onclick="addCurrentToCart()">
+          <i class="fa-solid fa-cart-plus"></i> AGREGAR AL CARRITO
+        </button>
+      </div>
     </div>
   </div>
 
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cart-modal">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h3>Carrito de Compras</h3>
+        <span class="close-modal" onclick="toggleCartModal()">&times;</span>
+      </div>
+      <div class="cart-items-list" id="cart-items-list"></div>
+      <div style="border-top: 1px solid #222; padding-top: 15px; margin-top: 15px;">
+        <div style="display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 900; margin-bottom: 12px;">
+          <span>Total:</span>
+          <span id="cart-total-price" style="color: var(--accent-gold);">$0</span>
+        </div>
+        <a href="#" class="btn-checkout-wa" onclick="sendCartToWhatsApp()">
+          <i class="fa-brands fa-whatsapp"></i> FINALIZAR POR WHATSAPP
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/573106552315?text=Hola%20Luna%20Capstore,%20quiero%20más%20información" target="_blank" class="wa-float">
+    <i class="fa-brands fa-whatsapp"></i> Escríbenos
+  </a>
+
+  <footer>
+    <p>© 2026 <span>LUNA CAPSTORE</span> | Bucaramanga, Colombia.</p>
+  </footer>
+
+  <script>
+    const waNumber = "573106552315";
+
+    // Slides del Carrusel
+    const slides = [
+      {
+        tag: "EDICIÓN LIMITADA 2026",
+        title: "ELEVA TU ESTILO CON LUNA CAPSTORE",
+        desc: "Gorras de calidad prémium con bordados de alta densidad.",
+        bg: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=1600&q=80"
+      },
+      {
+        tag: "PROTECCIÓN Y ESTILO",
+        title: "GAFAS DE SOL POLARIZADAS UV400",
+        desc: "Diseños exclusivos para complementar tu outfit diario.",
+        bg: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1600&q=80"
+      },
+      {
+        tag: "ELEGANCIA URBANA",
+        title: "RELOJES DE LUJO DE ALTA PRECISIÓN",
+        desc: "Acabados impecables en acero inoxidable.",
+        bg: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1600&q=80"
+      }
+    ];
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function initSlider() {
+      const dotsContainer = document.getElementById('hero-dots');
+      dotsContainer.innerHTML = '';
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+        dot.onclick = () => setSlide(idx);
+        dotsContainer.appendChild(dot);
+      });
+      updateSlide();
+      slideInterval = setInterval(nextSlide, 4000);
+    }
+
+    function setSlide(index) {
+      currentSlide = index;
+      updateSlide();
+      resetSliderTimer();
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlide();
+    }
+
+    function resetSliderTimer() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 4000);
+    }
+
+    function updateSlide() {
+      const hero = document.getElementById('hero-slider');
+      const data = slides[currentSlide];
+
+      hero.style.backgroundImage = `url('${data.bg}')`;
+      document.getElementById('slide-tag').innerText = data.tag;
+      document.getElementById('slide-title').innerText = data.title;
+      document.getElementById('slide-desc').innerText = data.desc;
+
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+
+      const content = document.getElementById('hero-content');
+      content.style.animation = 'none';
+      content.offsetHeight;
+      content.style.animation = 'fadeIn 0.8s ease-in-out';
+    }
+
+    // Datos de Productos
+    const productos = [
+      {
+        id: 1, categoria: 'gorras', nombre: 'Gorra LA Black Edition', precioNum: 50000, precio: '$50.000',
+        fotos: [
+          'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=600&q=80',
+          'https://images.unsplash.com/photo-1575428652377-a2d80e2277fc?auto=format&fit=crop&w=600&q=80',
+          'https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=600&q=80'
+        ],
+        specs: ['Talla ajustable (Snapback)', 'Calidad Premium 1:1', 'Bordado de alta densidad', 'Bolsa protectora incluida']
+      },
+      {
+        id: 2, categoria: 'gafas', nombre: 'Gafas Black Polarized', precioNum: 50000, precio: '$50.000',
+        fotos: [
+          'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80',
+          'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80'
+        ],
+        specs: ['Protección UV400', 'Lentes polarizados anti-reflejo', 'Incluye estuche rígido y paño']
+      },
+      {
+        id: 3, categoria: 'relojes', nombre: 'Reloj Luxury Black Steel', precioNum: 65000, precio: '$65.000',
+        fotos: [
+          'https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80',
+          'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80'
+        ],
+        specs: ['Movimiento de precisión', 'Incluye caja de lujo', 'Resistente a salpicaduras']
+      }
+    ];
+
+    let currentProduct = null;
+    let cart = [];
+
+    function showHomeView() {
+      document.getElementById('home-wrapper').style.display = 'block';
+      document.getElementById('catalog-section').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openCategory(cat) {
+      document.getElementById('home-wrapper').style.display = 'none';
+      document.getElementById('catalog-section').style.display = 'block';
+      
+      const titleMap = { 'gorras': 'Gorras ($50.000)', 'gafas': 'Gafas ($50.000)', 'relojes': 'Relojes ($65.000)' };
+      document.getElementById('current-category-title').innerText = titleMap[cat];
+
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
+
+      const filtrados = productos.filter(p => p.categoria === cat);
+      filtrados.forEach(prod => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-img-wrapper" onclick="openProductModal(${prod.id})">
+            <img src="${prod.fotos[0]}" class="product-img">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title" onclick="openProductModal(${prod.id})">${prod.nombre}</h3>
+            <div class="product-price">${prod.precio}</div>
+            <div class="card-actions">
+              <button class="btn-detail" onclick="openProductModal(${prod.id})">Ver Más</button>
+              <button class="btn-add-cart" onclick="addToCartDirect(${prod.id})"><i class="fa-solid fa-cart-plus"></i></button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openProductModal(id) {
+      currentProduct = productos.find(p => p.id === id);
+      document.getElementById('modal-main-img').src = currentProduct.fotos[0];
+      document.getElementById('modal-title').innerText = currentProduct.nombre;
+      document.getElementById('modal-price').innerText = currentProduct.precio;
+
+      const thumbsGrid = document.getElementById('modal-thumbs');
+      thumbsGrid.innerHTML = '';
+      currentProduct.fotos.forEach((foto, idx) => {
+        const img = document.createElement('img');
+        img.src = foto;
+        img.className = `thumb-img ${idx === 0 ? 'active' : ''}`;
+        img.onclick = () => {
+          document.getElementById('modal-main-img').src = foto;
+          document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+          img.classList.add('active');
+        };
+        thumbsGrid.appendChild(img);
+      });
+
+      const specsList = document.getElementById('modal-specs');
+      specsList.innerHTML = '';
+      currentProduct.specs.forEach(s => {
+        const li = document.createElement('li');
+        li.innerText = s;
+        specsList.appendChild(li);
+      });
+
+      document.getElementById('product-modal').classList.add('active');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.remove('active');
+    }
+
+    function addToCartDirect(id) {
+      const prod = productos.find(p => p.id === id);
+      addToCart(prod, 1);
+    }
+
+    function addCurrentToCart() {
+      if (currentProduct) {
+        addToCart(currentProduct, 1);
+        closeProductModal();
+      }
+    }
+
+    function addToCart(product, qty) {
+      const index = cart.findIndex(item => item.id === product.id);
+      if (index > -1) { cart[index].qty += qty; }
+      else { cart.push({ ...product, qty }); }
+      updateCartUI();
+      toggleCartModal(true);
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('cart-count').innerText = totalCount;
+
+      const list = document.getElementById('cart-items-list');
+      list.innerHTML = '';
+      let totalPriceNum = 0;
+
+      cart.forEach(item => {
+        totalPriceNum += item.precioNum * item.qty;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.fotos[0]}" class="cart-item-img">
+          <div style="flex-grow: 1;">
+            <div style="font-size: 0.85rem; font-weight: 700;">${item.nombre}</div>
+            <div style="font-size: 0.85rem; color: var(--accent-gold);">${item.precio} x ${item.qty}</div>
+          </div>
+          <button style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.2rem;" onclick="removeFromCart(${item.id})">&times;</button>
+        `;
+        list.appendChild(div);
+      });
+
+      document.getElementById('cart-total-price').innerText = '$' + totalPriceNum.toLocaleString('es-CO');
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCartUI();
+    }
+
+    function toggleCartModal(show = null) {
+      const modal = document.getElementById('cart-modal');
+      if (show === true) modal.classList.add('active');
+      else if (show === false) modal.classList.remove('active');
+      else modal.classList.toggle('active');
+    }
+
+    function sendCartToWhatsApp() {
+      if (cart.length === 0) return alert("Tu carrito está vacío.");
+      let text = "Hola Luna Capstore, deseo realizar este pedido:\n\n";
+      let total = 0;
+      cart.forEach(item => {
+        text += `• *${item.nombre}* x${item.qty} (${item.precio})\n`;
+        total += item.precioNum * item.qty;
+      });
+      text += `\n*Total:* $${total.toLocaleString('es-CO')}\nPor favor me confirman disponibilidad.`;
+      window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    // Inicializar carrusel al cargar la página
+    window.onload = initSlider;
+  </script>
 </body>
 </html>
