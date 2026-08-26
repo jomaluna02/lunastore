@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* HERO DINÁMICO — 3 productos, cambio automático cada 30 segundos. */
+    /* HERO DINÁMICO — se conserva el tamaño original del espejo. */
     .hero-product { position: absolute; right: max(2%, calc((100% - var(--max)) / 2 - 20px)); top: 34px; bottom: 34px; width: min(46vw, 545px); overflow: hidden; transform: rotate(2deg); border: 1px solid rgba(217,220,226,.24); border-radius: 260px 260px 30px 30px; background: radial-gradient(ellipse at center, rgba(255,255,255,.13), rgba(255,255,255,.025) 62%, rgba(0,0,0,.2)); box-shadow: inset 0 0 65px rgba(255,255,255,.035), 0 30px 100px rgba(0,0,0,.52); animation: heroFloat 6s ease-in-out infinite; }
     .hero-slides { position: absolute; inset: 0; }
     .hero-slide { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; animation: heroProduct 90s infinite; }
@@ -23,15 +23,18 @@
     .hero-product::after { content: ''; position: absolute; inset: 8px; z-index: 5; border: 1px solid rgba(255,255,255,.15); border-radius: inherit; box-shadow: inset 0 0 28px rgba(255,255,255,.025); pointer-events: none; }
     @keyframes heroProduct { 0%, 30% { opacity: 1; transform: scale(1); } 32%, 97% { opacity: 0; transform: scale(.98); } 100% { opacity: 1; transform: scale(1); } }
     @keyframes heroFloat { 0%,100% { transform: rotate(2deg) translateY(0); } 50% { transform: rotate(2deg) translateY(-9px); } }
-    /* LOGO — más visible en la barra superior, sin hacerlo dominante. */
-    .site-header .brand img { width: 70px !important; height: 70px !important; flex-basis: 70px !important; border-radius: 16px; }
-    .site-header .brand strong { font-size: 1.18rem; }
-    .site-header { min-height: 96px; }
+    /* LOGO — más grande únicamente dentro de la barra superior. */
+    .site-header { min-height: 92px; }
+    .site-header .brand { min-width: 235px; gap: 14px; }
+    .site-header .brand img { width: 64px !important; height: 64px !important; flex-basis: 64px !important; border-radius: 15px; }
+    .site-header .brand strong { font-size: 1.16rem; }
+    .site-header .brand small { font-size: .58rem; }
     @media (max-width: 900px) { .hero-product { right: 3%; width: 48vw; } }
     @media (max-width: 600px) {
-      .site-header { min-height: 78px; }
-      .site-header .brand img { width: 52px !important; height: 52px !important; flex-basis: 52px !important; }
-      .site-header .brand strong { font-size: .86rem; }
+      .site-header { min-height: 76px; }
+      .site-header .brand { min-width: 0; }
+      .site-header .brand img { width: 50px !important; height: 50px !important; flex-basis: 50px !important; }
+      .site-header .brand strong { font-size: .84rem; }
       .hero-product { width: 235px; height: 290px; right: 50%; top: auto; bottom: 18px; transform: translateX(50%) rotate(2deg); }
       .hero-slide img { width: 116%; height: 116%; transform: scale(1.01); }
     }
@@ -47,13 +50,7 @@
   <main id="inicio">
     <section class="hero">
       <div class="hero-content"><p class="eyebrow">LUNA XXI · ACCESORIOS</p><h1>Tu estilo.<br><span>Tu momento.</span></h1><p class="hero-text">Relojes, gafas y gorras seleccionados para completar tu estilo.</p><div class="hero-actions"><a class="button button-light" href="#catalogo">Ver colección</a><a class="button button-outline" href="#relojes">Ver relojes</a></div><div class="hero-benefits"><span><b>01</b> Selección</span><span><b>02</b> Atención</span><span><b>03</b> Envíos Colombia</span></div></div>
-      <div class="hero-product" aria-label="Productos destacados">
-        <div class="hero-slides">
-          <div class="hero-slide"><img src="../relojes/Rolex SubmarinerNegro con dorado.png" alt="Reloj Submariner negro con dorado"><span class="hero-slide-label">Negro · Dorado</span></div>
-          <div class="hero-slide"><img src="../relojes/Rolex Submariner Plateado Verde" alt="Reloj Submariner plateado con verde"><span class="hero-slide-label">Plateado · Verde</span></div>
-          <div class="hero-slide"><img src="../relojes/Reloj Submariner Azul-Plateado.png" alt="Reloj Submariner azul y plateado"><span class="hero-slide-label">Azul · Plateado</span></div>
-        </div>
-      </div>
+      <div class="hero-product" aria-label="Productos destacados"><div class="hero-slides"><div class="hero-slide"><img src="../relojes/Rolex SubmarinerNegro con dorado.png" alt="Reloj Submariner negro con dorado"><span class="hero-slide-label">Negro · Dorado</span></div><div class="hero-slide"><img src="../relojes/Rolex Submariner Plateado Verde" alt="Reloj Submariner plateado con verde"><span class="hero-slide-label">Plateado · Verde</span></div><div class="hero-slide"><img src="../relojes/Reloj Submariner Azul-Plateado.png" alt="Reloj Submariner azul y plateado"><span class="hero-slide-label">Azul · Plateado</span></div></div></div>
     </section>
     <section class="categories container" aria-label="Categorías"><article class="category-card category-watch" id="relojes"><span class="category-number">01</span><div><p>Explora la colección</p><h2>Relojes</h2><a href="#catalogo">Ver relojes →</a></div></article><article class="category-card category-glasses" id="gafas"><span class="category-number">02</span><div><p>Próximamente</p><h2>Gafas</h2><a href="#catalogo">Ver colección →</a></div></article><article class="category-card category-caps" id="gorras"><span class="category-number">03</span><div><p>Explora la colección</p><h2>Gorras</h2><a href="#catalogo">Ver gorras →</a></div></article></section>
     <section class="catalog container" id="catalogo"><div class="section-heading"><div><p class="eyebrow">Selección Luna XXI</p><h2>Productos destacados</h2></div><p class="section-copy">Una selección inicial. Cuando agregues nuevos productos, esta sección puede crecer sin cambiar la estructura.</p></div><div class="catalog-tools"><a class="filter active" href="#catalogo">Todos</a><a class="filter" href="#relojes">Relojes</a><a class="filter" href="#gorras">Gorras</a><a class="filter" href="#gafas">Gafas</a></div><div class="product-grid"><article class="product-card"><a class="product-image" href="#producto-negro"><span class="badge">Oferta</span><img src="../relojes/Rolex SubmarinerNegro con dorado.png" alt="Submariner negro con dorado"></a><div class="product-info"><p class="product-category">Reloj · Submariner</p><h3>Negro con dorado</h3><div class="product-footer"><strong>$000.000</strong><a href="#producto-negro">Ver producto</a></div></div></article><article class="product-card"><a class="product-image" href="#producto-verde"><img src="../relojes/Rolex Submariner Plateado Verde" alt="Submariner plateado con verde"></a><div class="product-info"><p class="product-category">Reloj · Submariner</p><h3>Plateado con verde</h3><div class="product-footer"><strong>$000.000</strong><a href="#producto-verde">Ver producto</a></div></div></article><article class="product-card"><a class="product-image" href="#producto-azul"><img src="../relojes/Reloj Submariner Azul-Plateado.png" alt="Submariner azul y plateado"></a><div class="product-info"><p class="product-category">Reloj · Submariner</p><h3>Azul con plateado</h3><div class="product-footer"><strong>$000.000</strong><a href="#producto-azul">Ver producto</a></div></div></article><article class="product-card"><a class="product-image" href="#producto-gorra-1"><img src="../gorras/negra-con-dorado.png" alt="Gorra negra con dorado"></a><div class="product-info"><p class="product-category">Gorra</p><h3>Negra con dorado</h3><div class="product-footer"><strong>$000.000</strong><a href="#producto-gorra-1">Ver producto</a></div></div></article></div></section>
