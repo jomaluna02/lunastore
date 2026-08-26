@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luna XXI Store — relojes, gafas y gorras.">
+  <title>LUNA XXI STORE | Versión 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="announcement">Envíos a toda Colombia · Atención personalizada por WhatsApp</div>
+
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Luna XXI Store">
+      <img src="../assets/luna-xxi-logo.png" alt="Luna XXI Store">
+      <span>
+        <strong>LUNA XXI</strong>
+        <small>STORE</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#relojes">Relojes</a>
+      <a href="#gafas">Gafas</a>
+      <a href="#gorras">Gorras</a>
+      <a href="#confianza">Nosotros</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-icon" href="#catalogo" aria-label="Buscar productos">⌕</a>
+      <a class="cart" href="#carrito" aria-label="Carrito">🛒 <span>0</span></a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">LUNA XXI · ACCESORIOS</p>
+        <h1>Tu estilo.<br><span>Tu momento.</span></h1>
+        <p class="hero-text">Relojes, gafas y gorras seleccionados para completar tu estilo.</p>
+        <div class="hero-actions">
+          <a class="button button-light" href="#catalogo">Ver colección</a>
+          <a class="button button-outline" href="#relojes">Ver relojes</a>
+        </div>
+        <div class="hero-benefits">
+          <span><b>01</b> Selección</span>
+          <span><b>02</b> Atención</span>
+          <span><b>03</b> Envíos Colombia</span>
+        </div>
+      </div>
+
+      <div class="hero-product">
+        <div class="hero-product-glow"></div>
+        <img src="../relojes/Rolex SubmarinerNegro con dorado.png" alt="Reloj Submariner negro con dorado">
+        <span>Destacado</span>
+      </div>
+    </section>
+
+    <section class="categories container" aria-label="Categorías">
+      <article class="category-card category-watch" id="relojes">
+        <span class="category-number">01</span>
+        <div>
+          <p>Explora la colección</p>
+          <h2>Relojes</h2>
+          <a href="#catalogo">Ver relojes →</a>
+        </div>
+      </article>
+      <article class="category-card category-glasses" id="gafas">
+        <span class="category-number">02</span>
+        <div>
+          <p>Próximamente</p>
+          <h2>Gafas</h2>
+          <a href="#catalogo">Ver colección →</a>
+        </div>
+      </article>
+      <article class="category-card category-caps" id="gorras">
+        <span class="category-number">03</span>
+        <div>
+          <p>Explora la colección</p>
+          <h2>Gorras</h2>
+          <a href="#catalogo">Ver gorras →</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="catalog container" id="catalogo">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Selección Luna XXI</p>
+          <h2>Productos destacados</h2>
+        </div>
+        <p class="section-copy">Una selección inicial. Cuando agregues nuevos productos, esta sección puede crecer sin cambiar la estructura.</p>
+      </div>
+
+      <div class="catalog-tools">
+        <a class="filter active" href="#catalogo">Todos</a>
+        <a class="filter" href="#relojes">Relojes</a>
+        <a class="filter" href="#gorras">Gorras</a>
+        <a class="filter" href="#gafas">Gafas</a>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card">
+          <a class="product-image" href="#producto-negro">
+            <span class="badge">Oferta</span>
+            <img src="../relojes/Rolex SubmarinerNegro con dorado.png" alt="Submariner negro con dorado">
+          </a>
+          <div class="product-info">
+            <p class="product-category">Reloj · Submariner</p>
+            <h3>Negro con dorado</h3>
+            <div class="product-footer">
+              <strong>$000.000</strong>
+              <a href="#producto-negro">Ver producto</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <a class="product-image" href="#producto-verde">
+            <img src="../relojes/Rolex Submariner Plateado Verde" alt="Submariner plateado con verde">
+          </a>
+          <div class="product-info">
+            <p class="product-category">Reloj · Submariner</p>
+            <h3>Plateado con verde</h3>
+            <div class="product-footer">
+              <strong>$000.000</strong>
+              <a href="#producto-verde">Ver producto</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <a class="product-image" href="#producto-azul">
+            <img src="../relojes/Reloj Submariner Azul-Plateado.png" alt="Submariner azul y plateado">
+          </a>
+          <div class="product-info">
+            <p class="product-category">Reloj · Submariner</p>
+            <h3>Azul con plateado</h3>
+            <div class="product-footer">
+              <strong>$000.000</strong>
+              <a href="#producto-azul">Ver producto</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <a class="product-image" href="#producto-gorra-1">
+            <img src="../gorras/negra-con-dorado.png" alt="Gorra negra con dorado">
+          </a>
+          <div class="product-info">
+            <p class="product-category">Gorra</p>
+            <h3>Negra con dorado</h3>
+            <div class="product-footer">
+              <strong>$000.000</strong>
+              <a href="#producto-gorra-1">Ver producto</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="trust container" id="confianza">
+      <div class="trust-intro">
+        <p class="eyebrow">Compra con confianza</p>
+        <h2>Una tienda sencilla de entender y fácil de comprar.</h2>
+      </div>
+      <div class="trust-grid">
+        <article><b>01</b><h3>Envíos</h3><p>Envíos a diferentes ciudades de Colombia.</p></article>
+        <article><b>02</b><h3>Atención</h3><p>Resuelve tus dudas directamente por WhatsApp.</p></article>
+        <article><b>03</b><h3>Productos</h3><p>Cada producto tendrá fotografías y detalles claros.</p></article>
+        <article><b>04</b><h3>Pagos</h3><p>Información clara antes de finalizar tu compra.</p></article>
+      </div>
+    </section>
+
+    <section class="whatsapp container">
+      <div>
+        <p class="eyebrow">¿Tienes una pregunta?</p>
+        <h2>Hablemos por WhatsApp.</h2>
+        <p>Un canal directo para resolver dudas sobre productos, disponibilidad y pedidos.</p>
+      </div>
+      <a class="button button-light" href="https://wa.me/57XXXXXXXXXX">Escribir por WhatsApp</a>
+    </section>
+  </main>
+
+  <footer class="footer" id="carrito">
+    <div class="container footer-grid">
+      <div>
+        <strong class="footer-brand">LUNA XXI</strong>
+        <p>Relojes · Gafas · Gorras</p>
+      </div>
+      <div><span>Compra</span><a href="#relojes">Relojes</a><a href="#gafas">Gafas</a><a href="#gorras">Gorras</a></div>
+      <div><span>Ayuda</span><a href="#confianza">Envíos</a><a href="#confianza">Pagos</a><a href="https://wa.me/57XXXXXXXXXX">WhatsApp</a></div>
+      <div><span>Redes</span><a href="#">Instagram</a><a href="#">TikTok</a></div>
+    </div>
+    <div class="container footer-bottom"><small>© 2026 LUNA XXI STORE</small><small>Versión 2 · HTML + CSS</small></div>
+  </footer>
+</body>
+</html>
