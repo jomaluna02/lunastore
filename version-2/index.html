@@ -21,14 +21,17 @@
     .hero-slide-label { position: absolute; z-index: 4; bottom: 18px; left: 20px; padding: 7px 10px; border: 1px solid rgba(217,220,226,.14); border-radius: 8px; background: rgba(8,9,11,.78); color: var(--white); font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; }
     .hero-product::before { content: ''; position: absolute; inset: 0; z-index: 3; border-radius: inherit; background: linear-gradient(125deg, rgba(255,255,255,.14), transparent 20%, transparent 78%, rgba(255,255,255,.07)); pointer-events: none; }
     .hero-product::after { content: ''; position: absolute; inset: 8px; z-index: 5; border: 1px solid rgba(255,255,255,.15); border-radius: inherit; box-shadow: inset 0 0 28px rgba(255,255,255,.025); pointer-events: none; }
-    @keyframes heroProduct {
-      0%, 30% { opacity: 1; transform: scale(1); }
-      32%, 97% { opacity: 0; transform: scale(.98); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+    @keyframes heroProduct { 0%, 30% { opacity: 1; transform: scale(1); } 32%, 97% { opacity: 0; transform: scale(.98); } 100% { opacity: 1; transform: scale(1); } }
     @keyframes heroFloat { 0%,100% { transform: rotate(2deg) translateY(0); } 50% { transform: rotate(2deg) translateY(-9px); } }
+    /* LOGO — más visible en la barra superior, sin hacerlo dominante. */
+    .site-header .brand img { width: 70px !important; height: 70px !important; flex-basis: 70px !important; border-radius: 16px; }
+    .site-header .brand strong { font-size: 1.18rem; }
+    .site-header { min-height: 96px; }
     @media (max-width: 900px) { .hero-product { right: 3%; width: 48vw; } }
     @media (max-width: 600px) {
+      .site-header { min-height: 78px; }
+      .site-header .brand img { width: 52px !important; height: 52px !important; flex-basis: 52px !important; }
+      .site-header .brand strong { font-size: .86rem; }
       .hero-product { width: 235px; height: 290px; right: 50%; top: auto; bottom: 18px; transform: translateX(50%) rotate(2deg); }
       .hero-slide img { width: 116%; height: 116%; transform: scale(1.01); }
     }
