@@ -374,6 +374,52 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 
 }
 
+
+/* ==================== INSTAGRAM ==================== */
+.instagram-section{
+  padding:42px 0 48px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  text-align:center;
+}
+.instagram-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+.instagram-label{
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--muted);
+}
+.instagram-content h2{
+  margin:0;
+  font-size:clamp(24px,3vw,34px);
+  letter-spacing:-.02em;
+}
+.instagram-content p{
+  margin:0 0 8px;
+  color:var(--muted);
+  font-size:14px;
+}
+.instagram-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:11px 20px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  text-decoration:none;
+  color:inherit;
+  font-size:13px;
+  transition:transform .2s ease, background .2s ease;
+}
+.instagram-button:hover{
+  transform:translateY(-2px);
+  background:var(--surface);
+}
+
 </style>
 </head>
 <body>
@@ -491,6 +537,19 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 <!-- =====================================================
      5. LA MARCA
      ===================================================== -->
+
+<!-- ==================== INSTAGRAM ==================== -->
+<section class="instagram-section" aria-label="Instagram Luna XXI">
+  <div class="container instagram-content">
+    <span class="instagram-label">SÍGUENOS EN INSTAGRAM</span>
+    <h2>@lunaxxi.store</h2>
+    <p>Descubre nuevos modelos, lanzamientos y contenido de Luna XXI.</p>
+    <a class="instagram-button" href="https://www.instagram.com/lunaxxi.store/" target="_blank" rel="noopener noreferrer">
+      Ver Instagram →
+    </a>
+  </div>
+</section>
+
 <section class="section container reveal" id="nosotros">
 <div class="experience">
 <div>
