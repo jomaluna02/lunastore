@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Luna XXI Store — accesorios que hablan por ti.">
-<title>LUNA XXI STORE | Accesorios con actitud</title>
+<meta name="description" content="Luna XXI Store — relojes seleccionados con estilo. Envíos en Bucaramanga, pago contraentrega, compra segura por WhatsApp.">
+<title>LUNA XXI STORE | Relojes con actitud</title>
 
 <link rel="canonical" href="https://jomaluna02.github.io/lunastore/">
 <link rel="icon" type="image/png" href="assets/luna-xxi-logo.png">
@@ -12,15 +12,15 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Luna XXI Store">
-<meta property="og:title" content="LUNA XXI STORE | Accesorios con actitud">
-<meta property="og:description" content="Accesorios seleccionados para quienes no necesitan pedir permiso para destacar. Envíos gratis en Bucaramanga · Pago contraentrega.">
+<meta property="og:title" content="LUNA XXI STORE | Relojes con actitud">
+<meta property="og:description" content="Relojes seleccionados para quienes buscan presencia, diseño y personalidad. Envíos gratis en Bucaramanga · Pago contraentrega.">
 <meta property="og:image" content="https://jomaluna02.github.io/lunastore/assets/luna-xxi-logo.png">
 <meta property="og:url" content="https://jomaluna02.github.io/lunastore/">
 <meta property="og:locale" content="es_CO">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LUNA XXI STORE | Accesorios con actitud">
-<meta name="twitter:description" content="Accesorios seleccionados para quienes no necesitan pedir permiso para destacar.">
+<meta name="twitter:title" content="LUNA XXI STORE | Relojes con actitud">
+<meta name="twitter:description" content="Relojes seleccionados para quienes buscan presencia, diseño y personalidad.">
 <meta name="twitter:image" content="https://jomaluna02.github.io/lunastore/assets/luna-xxi-logo.png">
 
 <style>
@@ -61,13 +61,11 @@ body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.035;b
 
 .header-actions{display:flex;align-items:center;gap:10px}
 
-.icon-btn,.cart-btn{border:1px solid var(--line);background:var(--surface);color:var(--white);border-radius:12px;width:42px;height:42px;display:grid;place-items:center;cursor:pointer;transition:.25s}
+.icon-btn,.whatsapp-btn{border:1px solid var(--line);background:var(--surface);color:var(--white);border-radius:12px;width:42px;height:42px;display:grid;place-items:center;cursor:pointer;transition:.25s;text-decoration:none}
 
-.icon-btn:hover,.cart-btn:hover{border-color:var(--silver);transform:translateY(-2px)}
+.icon-btn:hover,.whatsapp-btn:hover{border-color:var(--silver);transform:translateY(-2px)}
 
-.cart-btn{position:relative;width:auto;padding:0 13px;font-size:.85rem}
-
-.cart-count{position:absolute;top:-7px;right:-7px;min-width:19px;height:19px;padding:0 5px;border-radius:20px;background:var(--silver);color:var(--ink);font-size:.68rem;font-weight:800;display:grid;place-items:center}
+.whatsapp-btn{width:auto;padding:0 14px;font-size:.85rem;font-weight:700}
 
 .menu-btn{display:none}
 
@@ -103,6 +101,12 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--silver)}
 
 .hero-note strong{display:block;color:var(--white);font-size:1.35rem;font-family:'Space Grotesk',sans-serif}
 
+.hero-product{position:absolute;z-index:2;right:max(7%,calc((100% - 1180px)/2));bottom:55px;width:clamp(190px,22vw,290px);height:clamp(250px,31vw,380px);border:1px solid rgba(217,220,226,.25);border-radius:180px 180px 24px 24px;padding:17px;transform:rotate(5deg);background:linear-gradient(145deg,rgba(217,220,226,.14),rgba(255,255,255,.02));box-shadow:var(--shadow);animation:float 6s ease-in-out infinite}
+
+.hero-product img{width:100%;height:100%;object-fit:contain;padding:25px;border-radius:160px 160px 15px 15px;filter:saturate(.88) contrast(1.04)}
+
+.hero-product-label{position:absolute;bottom:28px;left:28px;padding:8px 11px;border:1px solid rgba(255,255,255,.25);border-radius:9px;background:rgba(8,9,11,.7);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;backdrop-filter:blur(8px)}
+
 .marquee{overflow:hidden;border-bottom:1px solid var(--line);border-top:1px solid var(--line);background:var(--surface)}
 
 .marquee-track{display:flex;width:max-content;animation:marquee 25s linear infinite}
@@ -110,6 +114,16 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--silver)}
 .marquee-track span{display:flex;align-items:center;gap:28px;padding:15px 28px;font-family:'Space Grotesk',sans-serif;font-size:.72rem;letter-spacing:.2em;color:var(--silver);white-space:nowrap}
 
 .marquee-track span:after{content:'✦';color:var(--muted)}
+
+.trust-section{padding:60px 0 20px}
+
+.trust-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+.trust-item{padding:20px 18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025);display:flex;flex-direction:column;gap:6px}
+
+.trust-item b{font-family:'Space Grotesk',sans-serif;font-size:1.05rem}
+
+.trust-item small{color:var(--muted);font-size:.72rem}
 
 .section{padding:105px 0}
 
@@ -155,21 +169,11 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .product-card:hover .photo-hint{opacity:1;transform:translateY(0)}
 
-.cart-item-copy{flex:1;min-width:0}
-
-.remove-item{flex:0 0 auto;width:34px;height:34px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--muted);font-size:1rem;cursor:pointer;transition:.2s}
-
-.remove-item:hover{color:var(--white);border-color:var(--silver);background:rgba(255,255,255,.08)}
-
 .product-media img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.2,.7,.2,1);filter:saturate(.86)}
 
 .product-card:hover .product-media img{transform:scale(1.08)}
 
 .product-badge{position:absolute;top:14px;left:14px;padding:7px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(8,9,11,.72);font-size:.63rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px)}
-
-.quick-btn{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border:1px solid rgba(255,255,255,.24);border-radius:12px;background:rgba(8,9,11,.78);color:var(--white);font-size:1.2rem;cursor:pointer;opacity:0;transform:translateY(8px);transition:.25s}
-
-.product-card:hover .quick-btn{opacity:1;transform:translateY(0)}
 
 .product-info{padding:19px}
 
@@ -181,41 +185,13 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .price{font-family:'Space Grotesk',sans-serif;font-size:1.2rem}
 
-.add-btn{border:1px solid var(--line);border-radius:10px;background:var(--silver);color:var(--ink);padding:9px 12px;font-size:.72rem;font-weight:800;cursor:pointer;transition:.2s}
+.buy-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;background:var(--silver);color:var(--ink);padding:9px 12px;font-size:.72rem;font-weight:800;cursor:pointer;transition:.2s;text-decoration:none}
 
-.add-btn:hover{background:var(--white);transform:scale(1.03)}
+.buy-btn:hover{background:var(--white);transform:scale(1.03)}
 
 .empty-state{grid-column:1/-1;text-align:center;border:1px dashed var(--line);padding:70px 20px;border-radius:var(--radius);color:var(--muted)}
 
 .empty-state strong{display:block;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:1.5rem;margin-bottom:8px}
-
-.category-strip{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
-
-.category-card{min-height:225px;position:relative;display:flex;align-items:end;padding:24px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#20232a,#0e1014);cursor:pointer;transition:.3s}
-
-.category-card:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(255,255,255,.18),transparent 28%);transition:.3s}
-
-.category-card:hover{transform:translateY(-6px);border-color:rgba(217,220,226,.42)}
-
-.category-card:hover:before{transform:scale(1.3)}
-
-.category-card:first-child{background:linear-gradient(135deg,#30343c,#0b0c0f)}
-
-.category-card.has-image{background-size:cover;background-position:center}
-
-.category-card.has-image:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,11,.05),rgba(8,9,11,.9))}
-
-.category-card.is-coming{background:linear-gradient(135deg,#252930,#0b0c0f)}
-
-.category-card.is-coming h3,.category-card.is-coming p,.category-card.is-coming .arrow{opacity:.72}
-
-.category-card h3,.category-card p{position:relative;z-index:1}
-
-.category-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.7rem;letter-spacing:-.05em}
-
-.category-card p{color:var(--muted);font-size:.76rem;margin-top:5px}
-
-.category-card .arrow{position:absolute;top:22px;right:23px;font-size:1.3rem;color:var(--silver)}
 
 .experience{padding:40px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(120deg,var(--surface-2),var(--surface));display:grid;grid-template-columns:1.2fr 1fr;gap:35px;align-items:center}
 
@@ -239,9 +215,9 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .footer strong{color:var(--white);letter-spacing:.16em}
 
-.modal-backdrop,.drawer-backdrop{display:none;position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.72);backdrop-filter:blur(7px)}
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.72);backdrop-filter:blur(7px)}
 
-.modal-backdrop.open,.drawer-backdrop.open{display:block}
+.modal-backdrop.open{display:block}
 
 .modal{position:fixed;z-index:31;left:50%;top:50%;width:min(800px,calc(100% - 30px));max-height:90vh;overflow:auto;transform:translate(-50%,-46%) scale(.96);opacity:0;pointer-events:none;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);box-shadow:var(--shadow);transition:.25s}
 
@@ -261,35 +237,13 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .modal-copy p{color:var(--muted);font-size:.86rem}
 
-.specs{list-style:none;margin:22px 0}
+.specs-label{display:block;margin:24px 0 6px;color:var(--muted);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+
+.specs{list-style:none;margin:0 0 22px}
 
 .specs li{padding:9px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:.75rem}
 
 .specs li:before{content:'✦';color:var(--silver);margin-right:9px}
-
-.drawer{position:fixed;z-index:32;right:0;top:0;height:100%;width:min(420px,100%);padding:25px;background:var(--surface-2);border-left:1px solid var(--line);transform:translateX(100%);transition:.3s;display:flex;flex-direction:column}
-
-.drawer.open{transform:translateX(0)}
-
-.drawer-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line)}
-
-.drawer-head h2{font-family:'Space Grotesk',sans-serif}
-
-.close-btn{background:none;border:0;color:var(--white);font-size:1.6rem;cursor:pointer}
-
-.cart-items{flex:1;overflow:auto;padding:18px 0}
-
-.cart-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
-
-.cart-item img{width:65px;height:65px;border-radius:10px;object-fit:cover}
-
-.cart-item h4{font-size:.8rem}
-
-.cart-item p{color:var(--muted);font-size:.75rem;margin-top:4px}
-
-.cart-empty{color:var(--muted);font-size:.85rem;text-align:center;padding:50px 10px}
-
-.drawer-total{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:18px 0;font-family:'Space Grotesk',sans-serif}
 
 .wide-btn{width:100%}
 
@@ -311,39 +265,27 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .mobile-nav{display:none}
 
-@keyframes float{0%,100%{transform:rotate(5deg) translateY(0)}
+@keyframes float{0%,100%{transform:rotate(5deg) translateY(0)}50%{transform:rotate(2deg) translateY(-16px)}}
 
-50%{transform:rotate(2deg) translateY(-16px)}
+@keyframes orbit{to{transform:rotate(360deg)}}
 
-}
+@keyframes marquee{to{transform:translateX(-50%)}}
 
-@keyframes orbit{to{transform:rotate(360deg)}
-
-}
-
-@keyframes marquee{to{transform:translateX(-50%)}
-
-}
-
-@keyframes rise{from{opacity:0;transform:translateY(20px)}
-
-to{opacity:1;transform:none}
-
-}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
 @media(max-width:900px){.main-nav{display:none}
 
 .menu-btn{display:grid}
 
-.hero{min-height:560px}
+.hero{min-height:730px}
+
+.hero-product{right:5%;bottom:32px;width:190px;height:245px;opacity:.7}
 
 .hero-content{padding-top:55px;align-self:flex-start}
 
+.trust-strip{grid-template-columns:1fr 1fr}
+
 .product-grid{grid-template-columns:repeat(2,1fr)}
-
-.category-strip{grid-template-columns:1fr 1fr}
-
-.category-card:first-child{grid-column:1/-1}
 
 .experience{grid-template-columns:1fr}
 
@@ -371,7 +313,7 @@ to{opacity:1;transform:none}
 
 .brand img{width:46px;height:46px}
 
-.hero{min-height:520px}
+.hero{min-height:680px}
 
 .hero-content{width:calc(100% - 28px)}
 
@@ -381,9 +323,17 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 
 .hero-actions{flex-wrap:wrap}
 
+.hero-product{width:155px;height:205px;right:14px;bottom:28px}
+
 .hero-note{gap:15px}
 
 .hero-note strong{font-size:1.1rem}
+
+.trust-section{padding:40px 0 10px}
+
+.trust-strip{grid-template-columns:1fr 1fr;gap:10px}
+
+.trust-item{padding:14px}
 
 .section{padding:75px 0}
 
@@ -400,10 +350,6 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 .product-grid{grid-template-columns:1fr;gap:14px}
 
 .product-media{height:330px}
-
-.category-strip{grid-template-columns:1fr}
-
-.category-card:first-child{grid-column:auto}
 
 .experience{padding:25px}
 
@@ -432,7 +378,7 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 <!-- =====================================================
      1. BARRA SUPERIOR
      ===================================================== -->
-<div class="announcement">Envíos gratis en Bucaramanga · Pago contraentrega · Estilo sin fórmulas</div>
+<div class="announcement">Envíos gratis en Bucaramanga · Pago contraentrega · Compra por WhatsApp</div>
 
 <!-- =====================================================
      2. ENCABEZADO / MENÚ
@@ -442,18 +388,16 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 <img src="assets/luna-xxi-logo.png" alt="Logo Luna XXI Store">
 <span class="brand-copy">
 <strong>LUNA XXI</strong>
-<span>STORE · ACCESORIOS</span>
+<span>STORE · RELOJERÍA</span>
 </span>
 </a>
 <nav class="main-nav">
 <a href="#coleccion">Colección</a>
-<a href="#categorias">Categorías</a>
-<a href="#nosotros">La marca</a>
+<a href="#nosotros">Nosotros</a>
 </nav>
 <div class="header-actions">
 <button class="icon-btn" id="focus-search" aria-label="Buscar">⌕</button>
-<button class="cart-btn" id="open-cart">Bolsa <span class="cart-count" id="cart-count">0</span>
-</button>
+<a class="whatsapp-btn" id="header-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
 <button class="icon-btn menu-btn" id="open-menu" aria-label="Abrir menú">☰</button>
 </div>
 </header>
@@ -462,8 +406,7 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
 <nav class="mobile-nav" id="mobile-nav">
 <a href="#coleccion" data-close-menu>Colección</a>
-<a href="#categorias" data-close-menu>Categorías</a>
-<a href="#nosotros" data-close-menu>La marca</a>
+<a href="#nosotros" data-close-menu>Nosotros</a>
 </nav>
 
 <!-- =====================================================
@@ -472,40 +415,48 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 <main id="inicio">
 <section class="hero">
 <div class="hero-content">
-<p class="eyebrow">
-<i>
-</i> Luna XXI Store · Est. 2024</p>
-<h1>Tu estilo<br>
-<em>habla primero.</em>
-</h1>
-<p class="hero-copy">Accesorios seleccionados para quienes no necesitan pedir permiso para destacar. Descubre piezas con carácter, hechas para quedarse en la memoria.</p>
+<p class="eyebrow"><i></i> Luna XXI Store · Relojería · Est. 2024</p>
+<h1>El tiempo<br><em>es tu estilo.</em></h1>
+<p class="hero-copy">Relojes seleccionados para quienes buscan presencia, diseño y personalidad. Cada pieza está lista para acompañar tu día a día.</p>
 <div class="hero-actions">
-<a class="primary-btn" href="#coleccion">Ver colección <span>↗</span>
-</a>
-<a class="ghost-btn" href="#categorias">Explorar categorías</a>
+<a class="primary-btn" href="#coleccion">Ver colección <span>↗</span></a>
+<a class="ghost-btn" id="hero-whatsapp" href="#" target="_blank" rel="noopener">Comprar por WhatsApp</a>
 </div>
 <div class="hero-note">
-<div>
-<strong id="hero-count">03</strong>piezas destacadas</div>
-<div>
-<strong>XXI</strong>actitud propia</div>
-<div>
-<strong>24/7</strong>para tu estilo</div>
+<div><strong id="hero-count">03</strong>relojes disponibles</div>
+<div><strong>BGA</strong>envíos locales</div>
+<div><strong>100%</strong>pago contraentrega</div>
 </div>
+</div>
+<div class="hero-product" id="hero-product">
+<img id="hero-product-img" src="" alt="">
+<span class="hero-product-label" id="hero-product-label">Pieza destacada</span>
 </div>
 </section>
 <div class="marquee">
 <div class="marquee-track">
 <span>LUNA XXI STORE</span>
+<span>RELOJES CON ACTITUD</span>
 <span>ESTILO URBANO</span>
-<span>PIEZAS CON ACTITUD</span>
 <span>ACCESSORIES FOR THE BOLD</span>
 <span>LUNA XXI STORE</span>
+<span>RELOJES CON ACTITUD</span>
 <span>ESTILO URBANO</span>
-<span>PIEZAS CON ACTITUD</span>
 <span>ACCESSORIES FOR THE BOLD</span>
 </div>
 </div>
+
+<!-- =====================================================
+     3B. CONFIANZA (envíos, pago, atención)
+     ===================================================== -->
+<section class="section trust-section container reveal" id="confianza">
+<div class="trust-strip">
+<div class="trust-item"><b>🚚 Envíos</b><small>Gratis en Bucaramanga</small></div>
+<div class="trust-item"><b>💵 Pago</b><small>Contraentrega</small></div>
+<div class="trust-item"><b>💬 Atención</b><small>Directa por WhatsApp</small></div>
+<div class="trust-item"><b>✓ Revisión</b><small>Cada pieza se revisa antes de enviarse</small></div>
+</div>
+</section>
 
 <!-- =====================================================
      4. CATÁLOGO
@@ -513,16 +464,11 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 <section class="section container reveal" id="coleccion">
 <span class="section-kicker">01 / Selección actual</span>
 <div class="section-heading">
-<h2 class="section-title">Lo que está<br>llamando la atención.</h2>
-<p class="section-subtitle">Una interfaz lista para crecer contigo: filtra, busca y descubre cada pieza como si estuvieras recorriendo una tienda física.</p>
+<h2 class="section-title">Nuestra<br>colección de relojes.</h2>
+<p class="section-subtitle">Filtra, busca y descubre cada pieza como si estuvieras recorriendo una tienda física.</p>
 </div>
 <div class="filter-row">
-<div class="filters" id="filters">
-<button class="filter-chip active" data-filter="all">Todo</button>
-<button class="filter-chip" data-filter="gorras">Gorras</button>
-<button class="filter-chip" data-filter="gafas">Gafas</button>
-<button class="filter-chip" data-filter="relojes">Relojes</button>
-</div>
+<div class="filters" id="filters"></div>
 <div class="catalog-tools">
 <label class="search-box">
 <span>⌕</span>
@@ -535,143 +481,83 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 </select>
 </div>
 </div>
-<p class="results-line" id="results-line">
-</p>
-<div class="product-grid" id="product-grid">
-</div>
+<p class="results-line" id="results-line"></p>
+<div class="product-grid" id="product-grid"></div>
 </section>
 
 <!-- =====================================================
-     5. CATEGORÍAS
-     ===================================================== -->
-<section class="section container reveal" id="categorias">
-<span class="section-kicker">02 / Explora por energía</span>
-<div class="section-heading">
-<h2 class="section-title">Encuentra tu<br>frecuencia.</h2>
-<p class="section-subtitle">Cada categoría tiene su propio ritmo. Hoy empezamos con gorras; las demás ya tienen su lugar reservado.</p>
-</div>
-<div class="category-strip" id="category-cards">
-</div>
-</section>
-
-<!-- =====================================================
-     6. LA MARCA
+     5. LA MARCA
      ===================================================== -->
 <section class="section container reveal" id="nosotros">
 <div class="experience">
 <div>
-<span class="section-kicker">03 / La nueva Luna XXI</span>
-<h2>Menos catálogo.<br>
-<span>Más obsesión.</span>
-</h2>
-<p>Esta experiencia está pensada para que cada producto tenga su momento: imágenes protagonistas, movimiento sutil y una navegación que invita a seguir explorando.</p>
+<span class="section-kicker">02 / Sobre Luna XXI</span>
+<h2>No vendemos<br><span>solo relojes.</span></h2>
+<p>Luna XXI nace con la idea de ofrecer relojes con diseño y personalidad, sin pagar precios exagerados. Seleccionamos cada modelo pensando en presencia, calidad y estilo — y más adelante, en otros accesorios que sigan esa misma esencia.</p>
 </div>
 <div class="experience-points">
-<div class="experience-point">
-<b>01</b>
-<small>Descubre sin prisa</small>
-</div>
-<div class="experience-point">
-<b>02</b>
-<small>Elige con intención</small>
-</div>
-<div class="experience-point">
-<b>03</b>
-<small>Compra por WhatsApp</small>
-</div>
-<div class="experience-point">
-<b>XXI</b>
-<small>Hazlo a tu manera</small>
-</div>
+<div class="experience-point"><b>01</b><small>Descubre sin prisa</small></div>
+<div class="experience-point"><b>02</b><small>Elige con intención</small></div>
+<div class="experience-point"><b>03</b><small>Compra por WhatsApp</small></div>
+<div class="experience-point"><b>XXI</b><small>Hazlo a tu manera</small></div>
 </div>
 </div>
 </section>
 </main>
 
 <!-- =====================================================
-     7. PIE DE PÁGINA
+     6. PIE DE PÁGINA
      ===================================================== -->
 <footer class="footer">
 <div class="container footer-inner">
 <div>
 <strong>LUNA XXI STORE</strong>
-<p style="margin-top:7px">Accesorios con actitud · Bucaramanga, Colombia</p>
+<p style="margin-top:7px">Relojes con actitud · Bucaramanga, Colombia</p>
 </div>
 <p>© 2026 Luna XXI Store · Hecho para destacar.</p>
 </div>
 </footer>
 
 <!-- =====================================================
-     8. DETALLE DEL PRODUCTO
+     7. DETALLE DEL PRODUCTO
      ===================================================== -->
-<div class="modal-backdrop" id="modal-backdrop">
-</div>
+<div class="modal-backdrop" id="modal-backdrop"></div>
 <section class="modal" id="product-modal" role="dialog" aria-modal="true" aria-label="Detalle del producto">
 <button class="modal-close" id="close-modal">×</button>
 <div class="modal-grid">
 <div class="modal-image">
-<img id="modal-img" src="" alt="">
+<img id="modal-img" src="" alt="Foto del reloj seleccionado">
 </div>
 <div class="modal-copy">
-<span class="section-kicker" id="modal-category">
-</span>
-<h2 class="product-name" id="modal-name">
-</h2>
-<div class="price" id="modal-price">
-</div>
+<span class="section-kicker" id="modal-category"></span>
+<h2 class="product-name" id="modal-name"></h2>
+<div class="price" id="modal-price"></div>
 <p style="margin-top:15px">Una pieza seleccionada para darle personalidad a tu día. Escríbenos y confirma disponibilidad.</p>
-<ul class="specs" id="modal-specs">
-</ul>
-<button class="primary-btn wide-btn" id="modal-add">Agregar a la bolsa · <span id="modal-add-price">
-</span>
-</button>
+<span class="specs-label">Ficha técnica</span>
+<ul class="specs" id="modal-specs"></ul>
+<a class="primary-btn wide-btn" id="modal-buy" href="#" target="_blank" rel="noopener">Comprar por WhatsApp · <span id="modal-buy-price"></span></a>
 </div>
 </div>
 </section>
+<div class="toast" id="toast"></div>
 
 <!-- =====================================================
-     9. CARRITO / BOLSA
+     8. BOTÓN FLOTANTE DE WHATSAPP
      ===================================================== -->
-<div class="drawer-backdrop" id="drawer-backdrop">
-</div>
-<aside class="drawer" id="cart-drawer">
-<div class="drawer-head">
-<h2>Tu bolsa</h2>
-<button class="close-btn" id="close-cart">×</button>
-</div>
-<div class="cart-items" id="cart-items">
-</div>
-<div class="drawer-total">
-<span>Total</span>
-<span id="cart-total">$0</span>
-</div>
-<a class="primary-btn wide-btn" id="checkout" href="#" target="_blank">Finalizar por WhatsApp ↗</a>
-</aside>
-<div class="toast" id="toast">
-</div>
-
-<!-- =====================================================
-     9B. BOTÓN FLOTANTE DE WHATSAPP
-     ===================================================== -->
-<a class="whatsapp-float" id="whatsapp-float" href="https://wa.me/573106552315?text=Hola%20Luna%20XXI%20Store%2C%20quiero%20más%20información" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+<a class="whatsapp-float" id="whatsapp-float" href="https://wa.me/573106552315?text=Hola%20Luna%20XXI%20Store%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
 <svg viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.02 3C9.4 3 4.02 8.38 4.02 15c0 2.23.6 4.32 1.65 6.12L4 29l8.06-1.62A11.9 11.9 0 0 0 16.02 27C22.64 27 28 21.62 28 15S22.64 3 16.02 3zm6.98 16.53c-.3.85-1.5 1.57-2.46 1.77-.65.14-1.5.25-4.35-.94-3.65-1.51-6-5.2-6.18-5.44-.18-.24-1.48-1.97-1.48-3.76 0-1.79.94-2.67 1.27-3.03.33-.36.72-.45.96-.45.24 0 .48 0 .69.01.22.01.52-.08.81.62.3.72 1.02 2.5 1.11 2.68.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.37-.16.73.21.36.93 1.53 2 2.48 1.37 1.22 2.53 1.6 2.89 1.78.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.81-.18.33.12 2.1.99 2.46 1.17.36.18.6.27.69.42.09.15.09.85-.21 1.7z"/></svg>
 <span class="wa-label">Escríbenos</span>
 </a>
 
 <!-- =====================================================
-     10. FUNCIONES EXISTENTES
+     9. FUNCIONES
      ===================================================== -->
 <script>
-const imageCatalog=Object.freeze({
-'Negra con dorado':'gorras/negra-con-dorado.png',
-'LA negra con blanco':'gorras/la-negra-con-blanco.png',
-'Goorin Bros Panther Truck':'gorras/goorin-bros-panther-truck.png'
-});
-
-
+const WHATSAPP_NUMBER='573106552315';
+function waLink(text){return 'https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(text)}
 
 /* =========================================================
-   11. PRODUCTOS
+   10. PRODUCTOS
    ---------------------------------------------------------
    Para modificar un producto busca su bloque y cambia SOLO:
    - name       = nombre
@@ -679,12 +565,14 @@ const imageCatalog=Object.freeze({
    - priceLabel = precio mostrado
    - image      = imagen
    - specs      = características
+   Para agregar una nueva categoría (ej. 'gafas' o 'gorras'),
+   solo agrega productos con ese "category" — el filtro de
+   arriba los detecta solo, no hay que tocar nada más.
    ========================================================= */
 const products=[
 {
 id:201,
 category:'relojes',
-driveName:'Reloj Submariner Azul-Plateado',
 label:'Nuevo',
 name:'Rolex Submariner — Azul / Plateado',
 price:89000,
@@ -701,7 +589,6 @@ specs:[
 {
 id:202,
 category:'relojes',
-driveName:'Rolex SubmarinerNegro con dorado',
 label:'Nuevo',
 name:'Rolex Submariner Negro-Dorado',
 price:89000,
@@ -718,7 +605,6 @@ specs:[
 {
 id:203,
 category:'relojes',
-driveName:'Rolex Submariner Plateado Verde',
 label:'Nuevo',
 name:'Rolex Submariner Plateado-Verde',
 price:89000,
@@ -734,62 +620,62 @@ specs:[
 }
 ];
 
-
+/* =========================================================
+   11. CATEGORÍAS FUTURAS (no activo por ahora)
+   ---------------------------------------------------------
+   Por ahora la tienda solo vende relojes, así que la sección
+   de categorías está desactivada. El día que agregues productos
+   con category:'gafas' o category:'gorras', esta info y la
+   función de abajo sirven para reactivar esa sección si quieres.
+   ========================================================= */
+// const categoryInfo=[
+//   {key:'gorras',name:'Gorras',emptyLabel:'Próximamente...'},
+//   {key:'gafas',name:'Gafas',emptyLabel:'Próximamente...'},
+//   {key:'relojes',name:'Relojes',emptyLabel:'Próximamente...'}
+// ];
 
 /* =========================================================
-   12. CATEGORÍAS
+   12. ESTADO DE LA PÁGINA
    ========================================================= */
-const categoryInfo=[
-{key:'gorras',name:'Gorras',emptyLabel:'Próximamente...'},
-{key:'gafas',name:'Gafas',emptyLabel:'Próximamente...'},
-{key:'relojes',name:'Relojes',emptyLabel:'Próximamente...'}
-];
+const state={category:'all',query:'',sort:'featured',modalProduct:null};
 
-
-
-/* =========================================================
-   13. ESTADO DE LA PÁGINA
-   ========================================================= */
-const CART_STORAGE_KEY='luna-xxi-cart';
-function loadCart(){try{const saved=JSON.parse(localStorage.getItem(CART_STORAGE_KEY));return Array.isArray(saved)?saved:[]}catch(e){return[]}}
-function saveCart(){try{localStorage.setItem(CART_STORAGE_KEY,JSON.stringify(state.cart))}catch(e){}}
-
-const state={category:'all',query:'',sort:'featured',cart:loadCart(),modalProduct:null};
-
-
-const el=id=>document.getElementById(id);const money=value=>'$'+value.toLocaleString('es-CO');
-
+const el=id=>document.getElementById(id);
 
 function getVisible(){let list=products.filter(p=>(state.category==='all'||p.category===state.category)&&p.name.toLowerCase().includes(state.query.toLowerCase()));if(state.sort==='low')list.sort((a,b)=>a.price-b.price);if(state.sort==='high')list.sort((a,b)=>b.price-a.price);return list}
 
+function renderFilters(){const categories=[...new Set(products.map(p=>p.category))];const container=el('filters');if(categories.length<=1){container.style.display='none';state.category='all';return}container.style.display='flex';const labels={relojes:'Relojes',gafas:'Gafas',gorras:'Gorras'};container.innerHTML='<button class="filter-chip active" data-filter="all">Todo</button>'+categories.map(c=>'<button class="filter-chip" data-filter="'+c+'">'+(labels[c]||c)+'</button>').join('')}
 
-function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span><span class="photo-hint">Ver detalle ↗</span></div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span><button class="add-btn" data-add="'+p.id+'">+ Agregar</button></div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
+function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span><span class="photo-hint">Ver detalle ↗</span></div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span><a class="buy-btn" href="'+waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')')+'" target="_blank" rel="noopener">Comprar</a></div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
 
-
-function renderCategoryCards(){const container=el('category-cards');if(!container)return;container.innerHTML=categoryInfo.map(category=>{const available=products.filter(product=>product.category===category.key);const product=available.length?available[Math.floor(Math.random()*available.length)]:null;const style=product?' style="background-image:url(\''+product.image+'\')"':'';const detail=product?available.length+' '+(available.length===1?'producto disponible':'productos disponibles'):category.emptyLabel;return '<article class="category-card '+(product?'has-image':'is-coming')+'" data-filter="'+category.key+'"'+style+'><span class="arrow">↗</span><div><h3>'+category.name+'</h3><p>'+detail+'</p></div></article>'}).join('')}
+function updateHeroProduct(){const featured=products[0];if(!featured)return;el('hero-product-img').src=featured.image;el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada · '+featured.name}
 function updateHeroCount(){const heroCount=el('hero-count');if(!heroCount)return;const total=products.length;heroCount.textContent=total<10?'0'+total:String(total)}
 function setCategory(category){state.category=category;document.querySelectorAll('.filter-chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===category));renderProducts();el('coleccion').scrollIntoView({behavior:'smooth',block:'start'})}
-function openModal(id){const p=products.find(item=>item.id===Number(id));if(!p)return;state.modalProduct=p;el('modal-img').src=p.image;el('modal-img').alt=p.name;el('modal-category').textContent=p.category+' · '+p.label;el('modal-name').textContent=p.name;el('modal-price').textContent=p.priceLabel;el('modal-add-price').textContent=p.priceLabel;el('modal-specs').innerHTML=p.specs.map(s=>'<li>'+s+'</li>').join('');el('product-modal').classList.add('open');el('modal-backdrop').classList.add('open')}
-
+function openModal(id){const p=products.find(item=>item.id===Number(id));if(!p)return;state.modalProduct=p;el('modal-img').src=p.image;el('modal-img').alt=p.name;el('modal-category').textContent=p.category+' · '+p.label;el('modal-name').textContent=p.name;el('modal-price').textContent=p.priceLabel;el('modal-buy-price').textContent=p.priceLabel;el('modal-buy').href=waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')');el('modal-specs').innerHTML=p.specs.map(s=>'<li>'+s+'</li>').join('');el('product-modal').classList.add('open');el('modal-backdrop').classList.add('open')}
 
 function closeModal(){el('product-modal').classList.remove('open');el('modal-backdrop').classList.remove('open')}
-function addToCart(id){const p=products.find(item=>item.id===Number(id));if(!p)return;const existing=state.cart.find(item=>item.id===p.id);if(existing)existing.qty+=1;else state.cart.push({id:p.id,qty:1});renderCart();showToast(p.name+' fue agregado a tu bolsa')}
-function removeFromCart(id){state.cart=state.cart.filter(item=>item.id!==Number(id));renderCart();showToast('Producto retirado de tu bolsa')}
-
-
-function renderCart(){saveCart();const count=state.cart.reduce((sum,item)=>sum+item.qty,0);const total=state.cart.reduce((sum,item)=>{const p=products.find(product=>product.id===item.id);return sum+(p?p.price*item.qty:0)},0);el('cart-count').textContent=count;el('cart-total').textContent=money(total);el('cart-items').innerHTML=state.cart.length?state.cart.map(item=>{const p=products.find(product=>product.id===item.id);if(!p)return'';return '<div class="cart-item"><img src="'+p.image+'" alt="'+p.name+'"><div class="cart-item-copy"><h4>'+p.name+'</h4><p>'+item.qty+' × '+p.priceLabel+'</p></div><button class="remove-item" data-remove="'+p.id+'" aria-label="Quitar '+p.name+' de la bolsa" title="Quitar de la bolsa">🗑</button></div>'}).join(''):'<div class="cart-empty">Tu bolsa está esperando una pieza que se parezca a ti.</div>'}
-
-
-function openCart(){el('cart-drawer').classList.add('open');el('drawer-backdrop').classList.add('open')}function closeCart(){el('cart-drawer').classList.remove('open');el('drawer-backdrop').classList.remove('open')}
 function showToast(message){const toast=el('toast');toast.textContent=message;toast.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>toast.classList.remove('show'),2500)}
 function openMobileMenu(){el('mobile-nav').classList.add('open');el('mobile-nav-backdrop').classList.add('open')}
 function closeMobileMenu(){el('mobile-nav').classList.remove('open');el('mobile-nav-backdrop').classList.remove('open')}
 
+document.addEventListener('click',event=>{const filter=event.target.closest('[data-filter]');if(filter){setCategory(filter.dataset.filter);return}const quick=event.target.closest('[data-quick]');if(quick){openModal(quick.dataset.quick);return}});
+el('search').addEventListener('input',event=>{state.query=event.target.value;renderProducts()});
+el('sort').addEventListener('change',event=>{state.sort=event.target.value;renderProducts()});
+el('focus-search').addEventListener('click',()=>{el('coleccion').scrollIntoView({behavior:'smooth'});setTimeout(()=>el('search').focus(),500)});
+el('close-modal').addEventListener('click',closeModal);
+el('modal-backdrop').addEventListener('click',closeModal);
+el('open-menu').addEventListener('click',openMobileMenu);
+el('mobile-nav-backdrop').addEventListener('click',closeMobileMenu);
+document.querySelectorAll('[data-close-menu]').forEach(link=>link.addEventListener('click',closeMobileMenu));
 
-document.addEventListener('click',event=>{const filter=event.target.closest('[data-filter]');if(filter){setCategory(filter.dataset.filter);return}const add=event.target.closest('[data-add]');if(add){addToCart(add.dataset.add);return}const remove=event.target.closest('[data-remove]');if(remove){removeFromCart(remove.dataset.remove);return}const quick=event.target.closest('[data-quick]');if(quick){openModal(quick.dataset.quick);return}});el('search').addEventListener('input',event=>{state.query=event.target.value;renderProducts()});el('sort').addEventListener('change',event=>{state.sort=event.target.value;renderProducts()});el('focus-search').addEventListener('click',()=>{el('coleccion').scrollIntoView({behavior:'smooth'});setTimeout(()=>el('search').focus(),500)});el('open-cart').addEventListener('click',openCart);el('close-cart').addEventListener('click',closeCart);el('drawer-backdrop').addEventListener('click',closeCart);el('close-modal').addEventListener('click',closeModal);el('modal-backdrop').addEventListener('click',closeModal);el('modal-add').addEventListener('click',()=>{if(state.modalProduct){addToCart(state.modalProduct.id);closeModal();openCart()}});el('checkout').addEventListener('click',event=>{if(!state.cart.length){event.preventDefault();showToast('Agrega una pieza antes de finalizar');return}const items=state.cart.map(item=>{const p=products.find(product=>product.id===item.id);return item.qty+'x '+p.name}).join(', ');event.currentTarget.href='https://wa.me/573106552315?text='+encodeURIComponent('Hola Luna XXI Store, quiero comprar: '+items)});
-el('open-menu').addEventListener('click',openMobileMenu);el('mobile-nav-backdrop').addEventListener('click',closeMobileMenu);document.querySelectorAll('[data-close-menu]').forEach(link=>link.addEventListener('click',closeMobileMenu));
+const generalWaLink=waLink('Hola Luna XXI Store, quiero más información');
+el('header-whatsapp').href=generalWaLink;
+el('hero-whatsapp').href=generalWaLink;
 
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeModal();closeCart();closeMobileMenu()}});const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(node=>observer.observe(node));renderCategoryCards();updateHeroCount();renderProducts();renderCart();
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeModal();closeMobileMenu()}});
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(node=>observer.observe(node));
+
+renderFilters();updateHeroProduct();updateHeroCount();renderProducts();
 
 </script>
 </body>
