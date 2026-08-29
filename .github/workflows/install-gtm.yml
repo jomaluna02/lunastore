@@ -2,27 +2,28 @@ name: Install Google Tag Manager
 
 on:
   push:
-    paths:
-      - '.github/workflows/install-gtm.yml'
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
   install:
+    if: github.event.head_commit.message != 'Install Google Tag Manager'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Add Google Tag Manager container
+      - name: Add GTM to index.html
+        shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          path = Path('index.html')
-          text = path.read_text(encoding='utf-8')
-
-          head_tag = '''<!-- Google Tag Manager -->
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          head = '''<!-- Google Tag Manager -->
           <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -30,25 +31,23 @@ jobs:
           })(window,document,'script','dataLayer','GTM-MZ3N4ZBT');</script>
           <!-- End Google Tag Manager -->
           '''
-
-          body_tag = '''<!-- Google Tag Manager (noscript) -->
+          body = '''<!-- Google Tag Manager (noscript) -->
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZ3N4ZBT"
           height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <!-- End Google Tag Manager (noscript) -->
           '''
-
-          if 'GTM-MZ3N4ZBT' not in text:
-              text = text.replace('<head>', '<head>\n' + head_tag, 1)
-              text = text.replace('<body>', '<body>\n' + body_tag, 1)
-              path.write_text(text, encoding='utf-8')
+          if 'GTM-MZ3N4ZBT' not in s:
+              s = s.replace('<head>', '<head>\n' + head, 1)
+              s = s.replace('<body>', '<body>\n' + body, 1)
+              p.write_text(s, encoding='utf-8')
           PY
 
-      - name: Commit and remove temporary workflow
+      - name: Commit GTM change and remove installer
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           rm -f .github/workflows/install-gtm.yml
           git add index.html .github/workflows/install-gtm.yml
-          git diff --cached --quiet && exit 0
+          if git diff --cached --quiet; then exit 0; fi
           git commit -m "Install Google Tag Manager"
           git push
