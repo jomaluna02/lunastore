@@ -1,0 +1,22 @@
+{
+  "name": "Luna XXI Store",
+  "short_name": "Luna XXI",
+  "lang": "es-CO",
+  "start_url": "/lunastore/",
+  "scope": "/lunastore/",
+  "display": "standalone",
+  "background_color": "#08090b",
+  "theme_color": "#08090b",
+  "icons": [
+    {
+      "src": "assets/luna-xxi-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/luna-xxi-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
