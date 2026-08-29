@@ -438,6 +438,199 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
   background:var(--surface);
 }
 
+
+
+/* =========================================================
+   LUNA XXI — MEJORAS VISUALES / UX
+   Integradas directamente en este index.html.
+   No modifica productos, rutas de imágenes, Analytics,
+   GTM, búsqueda, filtros ni WhatsApp.
+   ========================================================= */
+
+/* 1. Scroll reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(26px);
+  transition:
+    opacity .72s cubic-bezier(.22,1,.36,1),
+    transform .72s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* 2. Entrada del Hero */
+.hero-content .eyebrow,
+.hero-content h1,
+.hero-content .hero-copy,
+.hero-content .hero-actions,
+.hero-content .hero-note{
+  animation:lunaHeroIn .8s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-content .eyebrow{animation-delay:.04s}
+.hero-content h1{animation-delay:.10s}
+.hero-content .hero-copy{animation-delay:.18s}
+.hero-content .hero-actions{animation-delay:.26s}
+.hero-content .hero-note{animation-delay:.34s}
+
+@keyframes lunaHeroIn{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
+
+/* 3. Hero más dinámico, sin 3D */
+.hero-product{
+  will-change:transform;
+  transition:
+    transform .45s cubic-bezier(.22,1,.36,1),
+    box-shadow .45s ease;
+}
+.hero-product:hover{
+  animation-play-state:paused;
+  transform:rotate(2deg) translateY(-6px);
+  box-shadow:0 32px 85px rgba(0,0,0,.48);
+}
+
+/* 4. Hover premium de productos */
+.product-card{
+  will-change:transform;
+  transition:
+    transform .38s cubic-bezier(.22,1,.36,1),
+    border-color .3s ease,
+    box-shadow .38s ease;
+}
+.product-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(217,220,226,.42);
+  box-shadow:0 28px 70px rgba(0,0,0,.40);
+}
+.product-media img{
+  transition:
+    transform .6s cubic-bezier(.22,1,.36,1),
+    filter .35s ease;
+}
+.product-card:hover .product-media img{
+  transform:scale(1.055);
+  filter:saturate(.94) contrast(1.05);
+}
+.product-info{
+  transition:transform .35s ease;
+}
+.product-card:hover .product-info{
+  transform:translateY(-2px);
+}
+
+/* 5. Microinteracciones */
+.primary-btn,
+.ghost-btn,
+.buy-btn,
+.whatsapp-float,
+.instagram-button,
+.icon-btn,
+.whatsapp-btn,
+.filter-chip,
+.quick-btn,
+.remove-item{
+  transition:
+    transform .22s cubic-bezier(.22,1,.36,1),
+    background-color .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    color .22s ease;
+}
+.primary-btn:hover,
+.buy-btn:hover,
+.whatsapp-float:hover,
+.instagram-button:hover,
+.whatsapp-btn:hover{
+  transform:translateY(-2px);
+}
+.primary-btn:active,
+.ghost-btn:active,
+.buy-btn:active,
+.whatsapp-float:active,
+.instagram-button:active,
+.icon-btn:active,
+.whatsapp-btn:active,
+.filter-chip:active{
+  transform:scale(.97);
+}
+
+/* 6. Búsqueda */
+.search-box input{
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background-color .25s ease;
+}
+.search-box input:focus{
+  border-color:rgba(217,220,226,.55);
+  box-shadow:0 0 0 4px rgba(217,220,226,.055);
+}
+
+/* 7. Filtros */
+.filter-chip:hover{
+  transform:translateY(-1px);
+}
+
+/* 8. Menú móvil */
+.mobile-nav{
+  transition:transform .38s cubic-bezier(.22,1,.36,1);
+}
+.mobile-nav-backdrop{
+  transition:opacity .3s ease;
+}
+
+/* 9. Accesibilidad */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  .reveal,
+  .reveal.visible,
+  .hero-content .eyebrow,
+  .hero-content h1,
+  .hero-content .hero-copy,
+  .hero-content .hero-actions,
+  .hero-content .hero-note,
+  .hero-product,
+  .product-card,
+  .product-media img,
+  .product-info,
+  .primary-btn,
+  .ghost-btn,
+  .buy-btn,
+  .whatsapp-float,
+  .instagram-button,
+  .icon-btn,
+  .whatsapp-btn,
+  .filter-chip,
+  .quick-btn,
+  .remove-item,
+  .search-box input,
+  .mobile-nav,
+  .mobile-nav-backdrop{
+    animation:none !important;
+    transition:none !important;
+    transform:none !important;
+    opacity:1 !important;
+  }
+}
+
+@media (hover:none){
+  .product-card:hover{
+    transform:none;
+    box-shadow:none;
+  }
+  .product-card:hover .product-media img,
+  .product-card:hover .product-info{
+    transform:none;
+  }
+  .hero-product:hover{
+    transform:rotate(5deg);
+  }
+}
+
 </style>
 </head>
 <body>
