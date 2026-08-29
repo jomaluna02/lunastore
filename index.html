@@ -119,11 +119,11 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--silver)}
 
 .hero-note strong{display:block;color:var(--white);font-size:1.35rem;font-family:'Space Grotesk',sans-serif}
 
-.hero-product{position:absolute;z-index:2;right:max(7%,calc((100% - 1180px)/2));bottom:55px;width:clamp(220px,25vw,340px);height:clamp(290px,34vw,445px);border:1px solid rgba(217,220,226,.25);border-radius:200px 200px 26px 26px;padding:17px;transform:rotate(5deg);background:linear-gradient(145deg,rgba(217,220,226,.14),rgba(255,255,255,.02));box-shadow:var(--shadow);animation:float 6s ease-in-out infinite}
+.hero-product{position:absolute;z-index:2;right:max(7%,calc((100% - 1180px)/2));bottom:50px;width:clamp(250px,28vw,390px);height:clamp(320px,36vw,480px);border:1px solid rgba(217,220,226,.25);border-radius:30px;padding:22px;transform:rotate(3deg);background:linear-gradient(145deg,rgba(217,220,226,.16),rgba(255,255,255,.02));box-shadow:var(--shadow);animation:float 6s ease-in-out infinite}
 
-.hero-product img{width:100%;height:100%;object-fit:contain;padding:25px;border-radius:160px 160px 15px 15px;filter:saturate(.88) contrast(1.04)}
+.hero-product img{width:100%;height:100%;object-fit:contain;padding:14px;border-radius:20px;filter:saturate(.88) contrast(1.04);mask-image:radial-gradient(ellipse 72% 72% at center,#000 58%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 72% 72% at center,#000 58%,transparent 100%)}
 
-.hero-product-label{position:absolute;bottom:28px;left:28px;padding:8px 11px;border:1px solid rgba(255,255,255,.25);border-radius:9px;background:rgba(8,9,11,.7);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;backdrop-filter:blur(8px)}
+.hero-product-label{position:absolute;bottom:28px;left:28px;right:28px;padding:8px 11px;border:1px solid rgba(255,255,255,.25);border-radius:9px;background:rgba(8,9,11,.7);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;backdrop-filter:blur(8px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
 
 .marquee{overflow:hidden;border-bottom:1px solid var(--line);border-top:1px solid var(--line);background:var(--surface)}
 
@@ -286,7 +286,7 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .mobile-nav{display:none}
 
-@keyframes float{0%,100%{transform:rotate(5deg) translateY(0)}50%{transform:rotate(2deg) translateY(-16px)}}
+@keyframes float{0%,100%{transform:rotate(3deg) translateY(0)}50%{transform:rotate(1deg) translateY(-16px)}}
 
 @keyframes orbit{to{transform:rotate(360deg)}}
 
@@ -300,7 +300,7 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .hero{min-height:730px}
 
-.hero-product{right:5%;bottom:32px;width:215px;height:275px;opacity:.7}
+.hero-product{right:5%;bottom:30px;width:255px;height:325px}
 
 .hero-content{padding-top:55px;align-self:flex-start}
 
@@ -344,7 +344,7 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 
 .hero-actions{flex-wrap:wrap}
 
-.hero-product{width:155px;height:205px;right:14px;bottom:28px}
+.hero-product{width:190px;height:250px;right:16px;bottom:26px}
 
 .hero-note{gap:15px}
 
@@ -405,6 +405,20 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
   flex-direction:column;
   align-items:center;
   gap:10px;
+}
+.instagram-logo{
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border:1px solid var(--line);
+  border-radius:16px;
+  margin-bottom:2px;
+}
+.instagram-icon{
+  width:34px;
+  height:34px;
+  color:var(--silver);
+  margin-bottom:2px;
 }
 .instagram-label{
   font-size:11px;
@@ -627,7 +641,7 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
     transform:none;
   }
   .hero-product:hover{
-    transform:rotate(5deg);
+    transform:rotate(3deg);
   }
 }
 
@@ -643,7 +657,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- =====================================================
      1. BARRA SUPERIOR
      ===================================================== -->
-<div class="announcement">Envíos en Bucaramanga y alrededores · Compra por WhatsApp · Estilo sin fórmulas</div>
+<div class="announcement">Envíos en Bucaramanga y alrededores · Compra por WhatsApp · Piezas únicas cada semana</div>
 
 <!-- =====================================================
      2. ENCABEZADO / MENÚ
@@ -690,7 +704,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="hero-note">
 <div><strong id="hero-count">03</strong>Relojes disponibles</div>
 <div><strong>BGA</strong>Envíos locales</div>
-<div><strong>DISEÑOS</strong>Diseños exclusivos</div>
+<div><strong>Limitadas</strong>Diseños exclusivos</div>
 </div>
 </div>
 <div class="hero-product" id="hero-product">
@@ -757,9 +771,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==================== INSTAGRAM ==================== -->
 <section class="instagram-section" aria-label="Instagram Luna XXI">
   <div class="container instagram-content">
+    <img class="instagram-logo" src="assets/luna-xxi-logo.png" alt="Logo Luna XXI Store">
+    <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
     <span class="instagram-label">SÍGUENOS EN INSTAGRAM</span>
     <h2>@lunaxxi.store</h2>
-    <p>Descubre nuevos modelos, lanzamientos y contenido de Luna XXI.</p>
+    <p>Piezas únicas, en unidades limitadas. Lo que ves hoy puede no estar mañana.</p>
     <a class="instagram-button" href="https://www.instagram.com/lunaxxi.store/" target="_blank" rel="noopener noreferrer">
       Ver Instagram →
     </a>
@@ -774,9 +790,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>Luna XXI nace con la idea de ofrecer relojes con diseño y personalidad, sin pagar precios exagerados. Seleccionamos cada modelo pensando en presencia, calidad y estilo — y más adelante, en otros accesorios que sigan esa misma esencia.</p>
 </div>
 <div class="experience-points">
-<div class="experience-point"><b>01</b><small>Descubre sin prisa</small></div>
-<div class="experience-point"><b>02</b><small>Elige con intención</small></div>
-<div class="experience-point"><b>03</b><small>Compra por WhatsApp</small></div>
+<div class="experience-point"><b>01</b><small>Piezas elegidas a mano</small></div>
+<div class="experience-point"><b>02</b><small>Menos, pero mejor</small></div>
+<div class="experience-point"><b>03</b><small>Detalles que se notan</small></div>
 <div class="experience-point"><b>XXI</b><small>Hazlo a tu manera</small></div>
 </div>
 </div>
@@ -925,7 +941,7 @@ function renderFilters(){const categories=[...new Set(products.map(p=>p.category
 
 function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span><span class="photo-hint">Ver detalle ↗</span></div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span><a class="buy-btn" href="'+waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')')+'" target="_blank" rel="noopener">Comprar</a></div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
 
-function updateHeroProduct(){const featured=products[0];if(!featured)return;el('hero-product-img').src=featured.image;el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada · '+featured.name}
+function updateHeroProduct(){const featured=products[0];if(!featured)return;el('hero-product-img').src=featured.image;el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada'}
 function updateHeroCount(){const heroCount=el('hero-count');if(!heroCount)return;const total=products.length;heroCount.textContent=total<10?'0'+total:String(total)}
 function setCategory(category){state.category=category;document.querySelectorAll('.filter-chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===category));renderProducts();el('coleccion').scrollIntoView({behavior:'smooth',block:'start'})}
 function openModal(id){const p=products.find(item=>item.id===Number(id));if(!p)return;state.modalProduct=p;el('modal-img').src=p.image;el('modal-img').alt=p.name;el('modal-category').textContent=p.category+' · '+p.label;el('modal-name').textContent=p.name;el('modal-price').textContent=p.priceLabel;el('modal-buy-price').textContent=p.priceLabel;el('modal-buy').href=waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')');el('modal-specs').innerHTML=p.specs.map(s=>'<li>'+s+'</li>').join('');el('product-modal').classList.add('open');el('modal-backdrop').classList.add('open')}
