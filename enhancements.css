@@ -1,0 +1,15 @@
+/* Luna XXI Store — mejora visual V2 */
+.reveal-on-scroll{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;will-change:opacity,transform}
+.reveal-on-scroll.is-visible{opacity:1;transform:none}
+.primary-btn,.ghost-btn,.buy-btn,.whatsapp-btn,.icon-btn,.filter-chip{will-change:transform}
+.primary-btn:active,.ghost-btn:active,.buy-btn:active,.whatsapp-btn:active,.icon-btn:active,.filter-chip:active{transform:translateY(0) scale(.98)}
+.product-card{will-change:transform,box-shadow}
+.product-card .product-info{transition:transform .35s ease}
+.product-card:hover .product-info{transform:translateY(-2px)}
+.product-card:nth-child(2){animation-delay:.05s}
+.product-card:nth-child(3){animation-delay:.1s}
+.product-card:nth-child(4){animation-delay:.15s}
+.product-card:nth-child(5){animation-delay:.2s}
+.product-card:nth-child(6){animation-delay:.25s}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal-on-scroll,.reveal-on-scroll.is-visible,.product-card,.hero-product,.hero:after,.marquee-track{animation:none!important;transition:none!important;transform:none!important;opacity:1!important}}
+@media (hover:none){.photo-hint{opacity:1;transform:none}.product-card:hover{transform:none;box-shadow:none}}
