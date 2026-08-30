@@ -184,15 +184,15 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .product-card:hover{border-color:rgba(217,220,226,.45);transform:translateY(-8px);box-shadow:var(--shadow)}
 
-.product-media{height:340px;position:relative;overflow:hidden;background:#fff}
+.product-media{height:340px;position:relative;overflow:hidden;background:#090a0c}
 
 .photo-hint{position:absolute;right:14px;bottom:14px;padding:9px 11px;border:1px solid rgba(255,255,255,.24);border-radius:10px;background:rgba(8,9,11,.78);color:var(--white);font-size:.68rem;font-weight:700;opacity:0;transform:translateY(8px);transition:.25s}
 
 .product-card:hover .photo-hint{opacity:1;transform:translateY(0)}
 
-.product-media img{width:100%;height:100%;object-fit:contain;object-position:center;padding:18px 28px;box-sizing:border-box;transition:transform .65s cubic-bezier(.2,.7,.2,1);filter:saturate(.86)}
+.product-media img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.2,.7,.2,1);filter:saturate(.86)}
 
-.product-card:hover .product-media img{transform:scale(1.025)}
+.product-card:hover .product-media img{transform:scale(1.08)}
 
 .product-badge{position:absolute;top:14px;left:14px;padding:7px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(8,9,11,.72);font-size:.63rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px)}
 
@@ -248,9 +248,29 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .modal-grid{display:grid;grid-template-columns:1fr 1fr}
 
-.modal-image{min-height:420px;background:#090a0c}
+.modal-image{display:flex;flex-direction:column;background:#090a0c}
 
-.modal-image img{width:100%;height:100%;object-fit:cover}
+.modal-photo-frame{position:relative;flex:1;min-height:380px;overflow:hidden;background:#090a0c}
+
+.modal-photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+.modal-photo-count{position:absolute;top:14px;right:14px;padding:5px 10px;border-radius:999px;background:rgba(8,9,11,.7);border:1px solid rgba(255,255,255,.2);font-size:.68rem;letter-spacing:.06em;backdrop-filter:blur(6px);display:none}
+
+.modal-nav{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(8,9,11,.65);border:1px solid rgba(255,255,255,.25);color:var(--white);font-size:1.3rem;line-height:1;display:none;place-items:center;cursor:pointer;backdrop-filter:blur(6px);transition:.2s}
+
+.modal-nav:hover{background:rgba(8,9,11,.88);border-color:var(--silver)}
+
+.modal-nav.prev{left:14px}
+
+.modal-nav.next{right:14px}
+
+.modal-thumbs{display:none;gap:8px;padding:12px;overflow-x:auto;background:var(--surface-2);border-top:1px solid var(--line)}
+
+.modal-thumb{flex:0 0 auto;width:56px;height:56px;border-radius:10px;overflow:hidden;border:1px solid var(--line);cursor:pointer;opacity:.5;transition:.2s;background:#090a0c;padding:0}
+
+.modal-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+.modal-thumb.active{opacity:1;border-color:var(--silver)}
 
 .modal-copy{padding:42px 30px}
 
@@ -380,7 +400,7 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 
 .modal-grid{grid-template-columns:1fr}
 
-.modal-image{height:290px;min-height:0}
+.modal-photo-frame{height:250px;min-height:0}
 
 .modal-copy{padding:25px}
 
@@ -525,7 +545,7 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
     filter .35s ease;
 }
 .product-card:hover .product-media img{
-  transform:scale(1.025);
+  transform:scale(1.055);
   filter:saturate(.94) contrast(1.05);
 }
 .product-info{
@@ -645,9 +665,6 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
   }
 }
 
-
-/* LUNA XXI — imágenes de catálogo normalizadas */
-/* Todas las tarjetas usan una escala visual uniforme para que los nuevos productos no requieran ajustes individuales. */
 </style>
 </head>
 <body>
@@ -822,8 +839,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="modal" id="product-modal" role="dialog" aria-modal="true" aria-label="Detalle del producto">
 <button class="modal-close" id="close-modal">×</button>
 <div class="modal-grid">
-<div class="modal-image">
+<div class="modal-image" id="modal-image">
+<div class="modal-photo-frame">
 <img id="modal-img" src="" alt="Foto del reloj seleccionado">
+<span class="modal-photo-count" id="modal-photo-count"></span>
+<button class="modal-nav prev" id="modal-prev" aria-label="Foto anterior">‹</button>
+<button class="modal-nav next" id="modal-next" aria-label="Foto siguiente">›</button>
+</div>
+<div class="modal-thumbs" id="modal-thumbs"></div>
 </div>
 <div class="modal-copy">
 <span class="section-kicker" id="modal-category"></span>
@@ -860,7 +883,11 @@ function waLink(text){return 'https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURI
    - name       = nombre
    - price      = precio numérico
    - priceLabel = precio mostrado
-   - image      = imagen
+   - images     = lista de fotos (puedes poner varias, ej:
+                  images:['foto1.png','foto2.png','foto3.png']
+                  La primera foto es la que se ve en la tarjeta.
+                  Si agregas más de una, en el detalle del
+                  producto aparecen miniaturas para cambiar de foto.)
    - specs      = características
    Para agregar una nueva categoría (ej. 'gafas' o 'gorras'),
    solo agrega productos con ese "category" — el filtro de
@@ -871,48 +898,96 @@ const products=[
 id:201,
 category:'relojes',
 label:'Nuevo',
-name:'Rolex Submariner — Azul / Plateado',
-price:89000,
-priceLabel:'$89.000',
-image:'relojes/Reloj SubmarinerAzul-Plateado.png',
+name:'Patek Philippe — Negro / Plata',
+price:69000,
+priceLabel:'$69.000',
+images:['relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%203.png'],
 specs:[
-'Diseño inspirado en el estilo Submariner',
-'Paleta de colores azul y plateado',
+'Diseño inspirado en el estilo Patek Philippe',
+'Paleta de colores negro y plata',
 'Brazalete metálico de acabado plateado',
 'Esfera de alta legibilidad',
-'Bisel de inspiración submarinista'
+'Movimiento de cuarzo'
 ]
 },
 {
 id:202,
 category:'relojes',
 label:'Nuevo',
-name:'Rolex Submariner Negro-Dorado',
-price:89000,
-priceLabel:'$89.000',
-image:'relojes/Rolex%20SubmarinerNegro%20con%20dorado.png',
+name:'Patek Philippe — Rosado / Plata',
+price:69000,
+priceLabel:'$69.000',
+images:['relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%203.png'],
 specs:[
-'Movimiento semiautomático',
-'Diseño negro con detalles dorados',
-'Bisel giratorio unidireccional con graduación de 60 minutos',
-'Esfera negra de alta legibilidad con marcadores luminiscentes',
-'Brazalete metálico estilo Oyster'
+'Diseño inspirado en el estilo Patek Philippe',
+'Paleta de colores rosado y plata',
+'Brazalete metálico de acabado plateado',
+'Esfera de alta legibilidad',
+'Movimiento de cuarzo'
 ]
 },
 {
 id:203,
 category:'relojes',
 label:'Nuevo',
-name:'Rolex Submariner Plateado-Verde',
-price:89000,
-priceLabel:'$89.000',
-image:'relojes/Rolex Submariner Plateado Verde',
+name:'Richard Mille — Dorado / Negro',
+price:69000,
+priceLabel:'$69.000',
+images:['relojes/Reloj%20Richard%20Millie%20en%20dorado%20y%20negro%201.png','relojes/Reloj%20Richard%20Millie%20en%20dorado%20y%20negro%202.png','relojes/Reloj%20Richard%20Millie%20en%20dorado%20y%20negro%203.png'],
 specs:[
-'Movimiento semiautomático',
-'Diseño plateado con detalles verdes',
-'Esfera verde de alta legibilidad',
-'Bisel giratorio de estilo submarinista',
-'Brazalete metálico de acabado plateado'
+'Diseño inspirado en el estilo Richard Mille',
+'Paleta de colores dorado y negro',
+'Brazalete metálico de acabado dorado',
+'Esfera de alta legibilidad',
+'Movimiento de cuarzo'
+]
+},
+{
+id:204,
+category:'relojes',
+label:'Nuevo',
+name:'Richard Mille — Plata / Rojo',
+price:69000,
+priceLabel:'$69.000',
+images:['relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%201.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%202.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%203.png'],
+specs:[
+'Diseño inspirado en el estilo Richard Mille',
+'Paleta de colores plata y rojo',
+'Brazalete metálico de acabado plateado',
+'Esfera de alta legibilidad',
+'Movimiento de cuarzo'
+]
+},
+{
+id:205,
+category:'relojes',
+label:'Nuevo',
+name:'Rolex Submariner — Azul / Plata',
+price:99000,
+priceLabel:'$99.000',
+images:['relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%201.png','relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%202.png','relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%203.png'],
+specs:[
+'Diseño inspirado en el estilo Submariner',
+'Paleta de colores azul y plata',
+'Brazalete metálico de acabado plateado',
+'Esfera de alta legibilidad',
+'Movimiento semiautomático'
+]
+},
+{
+id:206,
+category:'relojes',
+label:'Nuevo',
+name:'Rolex Submariner — Verde / Plata',
+price:99000,
+priceLabel:'$99.000',
+images:['relojes/Reloj%20Rolex%20Submariner%20verde%20y%20plata%201.png','relojes/Reloj%20Rolex%20Submariner%20verde%20y%20plata%202.png'],
+specs:[
+'Diseño inspirado en el estilo Submariner',
+'Paleta de colores verde y plata',
+'Brazalete metálico de acabado plateado',
+'Esfera de alta legibilidad',
+'Movimiento semiautomático'
 ]
 }
 ];
@@ -934,7 +1009,7 @@ specs:[
 /* =========================================================
    12. ESTADO DE LA PÁGINA
    ========================================================= */
-const state={category:'all',query:'',sort:'featured',modalProduct:null};
+const state={category:'all',query:'',sort:'featured',modalProduct:null,modalIndex:0};
 
 const el=id=>document.getElementById(id);
 
@@ -942,23 +1017,28 @@ function getVisible(){let list=products.filter(p=>(state.category==='all'||p.cat
 
 function renderFilters(){const categories=[...new Set(products.map(p=>p.category))];const container=el('filters');if(categories.length<=1){container.style.display='none';state.category='all';return}container.style.display='flex';const labels={relojes:'Relojes',gafas:'Gafas',gorras:'Gorras'};container.innerHTML='<button class="filter-chip active" data-filter="all">Todo</button>'+categories.map(c=>'<button class="filter-chip" data-filter="'+c+'">'+(labels[c]||c)+'</button>').join('')}
 
-function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.image+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span><span class="photo-hint">Ver detalle ↗</span></div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span><a class="buy-btn" href="'+waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')')+'" target="_blank" rel="noopener">Comprar</a></div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
+function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span><span class="photo-hint">Ver detalle ↗</span></div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span><a class="buy-btn" href="'+waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')')+'" target="_blank" rel="noopener">Comprar</a></div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
 
-function updateHeroProduct(){const featured=products[0];if(!featured)return;el('hero-product-img').src=featured.image;el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada'}
+function updateHeroProduct(){const featured=products[0];if(!featured)return;el('hero-product-img').src=featured.images[0];el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada'}
 function updateHeroCount(){const heroCount=el('hero-count');if(!heroCount)return;const total=products.length;heroCount.textContent=total<10?'0'+total:String(total)}
 function setCategory(category){state.category=category;document.querySelectorAll('.filter-chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===category));renderProducts();el('coleccion').scrollIntoView({behavior:'smooth',block:'start'})}
-function openModal(id){const p=products.find(item=>item.id===Number(id));if(!p)return;state.modalProduct=p;el('modal-img').src=p.image;el('modal-img').alt=p.name;el('modal-category').textContent=p.category+' · '+p.label;el('modal-name').textContent=p.name;el('modal-price').textContent=p.priceLabel;el('modal-buy-price').textContent=p.priceLabel;el('modal-buy').href=waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')');el('modal-specs').innerHTML=p.specs.map(s=>'<li>'+s+'</li>').join('');el('product-modal').classList.add('open');el('modal-backdrop').classList.add('open')}
+function renderModalImage(){const p=state.modalProduct;if(!p)return;const imgs=p.images;const idx=state.modalIndex;el('modal-img').src=imgs[idx];el('modal-img').alt=p.name+' - foto '+(idx+1);const multi=imgs.length>1;el('modal-prev').style.display=multi?'grid':'none';el('modal-next').style.display=multi?'grid':'none';el('modal-photo-count').style.display=multi?'block':'none';el('modal-photo-count').textContent=(idx+1)+' / '+imgs.length;document.querySelectorAll('.modal-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
+function renderModalThumbs(){const p=state.modalProduct;if(!p)return;const imgs=p.images;const container=el('modal-thumbs');if(imgs.length<=1){container.innerHTML='';container.style.display='none';return}container.style.display='flex';container.innerHTML=imgs.map((src,i)=>'<button class="modal-thumb'+(i===state.modalIndex?' active':'')+'" data-thumb="'+i+'" aria-label="Ver foto '+(i+1)+'"><img src="'+src+'" alt=""></button>').join('')}
+function goModalImage(step){const p=state.modalProduct;if(!p)return;const total=p.images.length;state.modalIndex=(state.modalIndex+step+total)%total;renderModalImage()}
+function openModal(id){const p=products.find(item=>item.id===Number(id));if(!p)return;state.modalProduct=p;state.modalIndex=0;renderModalImage();renderModalThumbs();el('modal-category').textContent=p.category+' · '+p.label;el('modal-name').textContent=p.name;el('modal-price').textContent=p.priceLabel;el('modal-buy-price').textContent=p.priceLabel;el('modal-buy').href=waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')');el('modal-specs').innerHTML=p.specs.map(s=>'<li>'+s+'</li>').join('');el('product-modal').classList.add('open');el('modal-backdrop').classList.add('open')}
 
 function closeModal(){el('product-modal').classList.remove('open');el('modal-backdrop').classList.remove('open')}
 function showToast(message){const toast=el('toast');toast.textContent=message;toast.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>toast.classList.remove('show'),2500)}
 function openMobileMenu(){el('mobile-nav').classList.add('open');el('mobile-nav-backdrop').classList.add('open')}
 function closeMobileMenu(){el('mobile-nav').classList.remove('open');el('mobile-nav-backdrop').classList.remove('open')}
 
-document.addEventListener('click',event=>{const filter=event.target.closest('[data-filter]');if(filter){setCategory(filter.dataset.filter);return}const quick=event.target.closest('[data-quick]');if(quick){openModal(quick.dataset.quick);return}});
+document.addEventListener('click',event=>{const filter=event.target.closest('[data-filter]');if(filter){setCategory(filter.dataset.filter);return}const quick=event.target.closest('[data-quick]');if(quick){openModal(quick.dataset.quick);return}const thumb=event.target.closest('[data-thumb]');if(thumb){state.modalIndex=Number(thumb.dataset.thumb);renderModalImage();renderModalThumbs();return}});
 el('search').addEventListener('input',event=>{state.query=event.target.value;renderProducts()});
 el('sort').addEventListener('change',event=>{state.sort=event.target.value;renderProducts()});
 el('focus-search').addEventListener('click',()=>{el('coleccion').scrollIntoView({behavior:'smooth'});setTimeout(()=>el('search').focus(),500)});
 el('close-modal').addEventListener('click',closeModal);
+el('modal-prev').addEventListener('click',()=>goModalImage(-1));
+el('modal-next').addEventListener('click',()=>goModalImage(1));
 el('modal-backdrop').addEventListener('click',closeModal);
 el('open-menu').addEventListener('click',openMobileMenu);
 el('mobile-nav-backdrop').addEventListener('click',closeMobileMenu);
@@ -968,7 +1048,7 @@ const generalWaLink=waLink('Hola Luna XXI Store, quiero más información');
 el('header-whatsapp').href=generalWaLink;
 el('hero-whatsapp').href=generalWaLink;
 
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeModal();closeMobileMenu()}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeModal();closeMobileMenu()}if(state.modalProduct&&el('product-modal').classList.contains('open')){if(event.key==='ArrowLeft')goModalImage(-1);if(event.key==='ArrowRight')goModalImage(1)}});
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(node=>observer.observe(node));
 
