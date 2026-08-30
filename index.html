@@ -115,7 +115,7 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--silver)}
 
 .ghost-btn:hover{border-color:var(--silver);transform:translateY(-3px)}
 
-.hero-note{display:flex;gap:24px;margin-top:46px;color:var(--muted);font-size:.72rem}
+.hero-note{display:flex;flex-wrap:wrap;row-gap:12px;gap:24px;margin-top:46px;color:var(--muted);font-size:.72rem}
 
 .hero-note strong{display:block;color:var(--white);font-size:1.35rem;font-family:'Space Grotesk',sans-serif}
 
@@ -326,11 +326,11 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .menu-btn{display:grid}
 
-.hero{min-height:730px}
+.hero{min-height:auto;flex-direction:column;align-items:stretch;padding-bottom:36px}
 
-.hero-product{right:5%;bottom:30px;width:255px;height:325px}
+.hero-product{position:static;margin:8px auto 0;right:auto;bottom:auto;width:230px;height:295px;transform:none}
 
-.hero-content{padding-top:55px;align-self:flex-start}
+.hero-content{padding-top:55px;align-self:auto}
 
 .trust-strip{grid-template-columns:1fr 1fr}
 
@@ -362,7 +362,7 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .brand img{width:46px;height:46px}
 
-.hero{min-height:680px}
+.hero{min-height:auto}
 
 .hero-content{width:calc(100% - 28px)}
 
@@ -372,7 +372,7 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 
 .hero-actions{flex-wrap:wrap}
 
-.hero-product{width:190px;height:250px;right:16px;bottom:26px}
+.hero-product{width:190px;height:250px;margin:6px auto 0}
 
 .hero-note{gap:15px}
 
@@ -917,7 +917,7 @@ priceLabel:'$69.000',
 soldOut:false,
 images:['relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%203.png'],
 specs:[
-'Ideal para momentos casuales',
+'Ideal para uso diario',
 'Paleta de colores negro y plata',
 'Brazalete metálico de acabado plateado',
 'Esfera de alta legibilidad',
@@ -934,7 +934,7 @@ priceLabel:'$69.000',
 soldOut:false,
 images:['relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%203.png'],
 specs:[
-'Ideal para momentos casuales',
+'Ideal para uso diario',
 'Paleta de colores rosado y plata',
 'Brazalete metálico de acabado plateado',
 'Esfera de alta legibilidad',
@@ -953,7 +953,7 @@ images:['relojes/Reloj%20Richard%20Millie%20en%20dorado%20y%20negro%201.png','re
 specs:[
 'Ideal para uso diario',
 'Paleta de colores dorado y negro',
-'Correas de caucho de alta durabilidad',
+'Brazalete metálico de acabado dorado',
 'Esfera de alta legibilidad',
 'Movimiento de cuarzo'
 ]
@@ -970,7 +970,7 @@ images:['relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%201.png','relo
 specs:[
 'Ideal para uso diario',
 'Paleta de colores plata y rojo',
-'Correas de caucho de alta durabilidad',
+'Brazalete metálico de acabado plateado',
 'Esfera de alta legibilidad',
 'Movimiento de cuarzo'
 ]
@@ -985,9 +985,9 @@ priceLabel:'$99.000',
 soldOut:false,
 images:['relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%201.png','relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%202.png','relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%203.png'],
 specs:[
-'Ideal para momentos especiales',
+'Ideal para uso diario',
 'Paleta de colores azul y plata',
-'Broche desplegable tipo Jubilee',
+'Brazalete metálico de acabado plateado',
 'Esfera de alta legibilidad',
 'Movimiento semiautomático'
 ]
@@ -999,12 +999,12 @@ label:'Nuevo',
 name:'Rolex Submariner — Verde / Plata',
 price:99000,
 priceLabel:'$99.000',
-soldOut:true,
+soldOut:false,
 images:['relojes/Reloj%20Rolex%20Submariner%20verde%20y%20plata%201.png','relojes/Reloj%20Rolex%20Submariner%20verde%20y%20plata%202.png'],
 specs:[
-'Ideal para momentos especiales',
+'Ideal para uso diario',
 'Paleta de colores verde y plata',
-'Broche desplegable tipo Jubilee',
+'Brazalete metálico de acabado plateado',
 'Esfera de alta legibilidad',
 'Movimiento semiautomático'
 ]
