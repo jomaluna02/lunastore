@@ -202,7 +202,15 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .product-card.sold-out .product-media img{filter:grayscale(.5) brightness(.65)}
 
+.preorder-strip{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:34px 12px 12px;display:flex;justify-content:center;background:linear-gradient(0deg,rgba(8,9,11,.85),rgba(8,9,11,0))}
+
+.preorder-strip span{padding:8px 14px;border-radius:999px;background:rgba(217,220,226,.94);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;text-align:center}
+
 .buy-btn.is-disabled{background:transparent;color:var(--muted);border-color:var(--line);cursor:not-allowed;pointer-events:none}
+
+.buy-btn.is-preorder{background:transparent;color:var(--white);border-color:rgba(217,220,226,.5)}
+
+.buy-btn.is-preorder:hover{background:rgba(217,220,226,.1)}
 
 .product-info{padding:19px}
 
@@ -285,6 +293,8 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 .modal-copy .product-name{font-size:1.8rem;margin-top:15px}
 
 .modal-copy p{color:var(--muted);font-size:.86rem}
+
+.modal-note{display:none;margin:16px 0 0;padding:12px 14px;border:1px solid rgba(217,220,226,.35);border-radius:12px;background:rgba(217,220,226,.08);font-size:.78rem;color:var(--silver)}
 
 .specs-label{display:block;margin:24px 0 6px;color:var(--muted);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 
@@ -405,6 +415,8 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 .experience-points{grid-template-columns:1fr 1fr}
 
 .footer-inner{flex-direction:column}
+
+.modal-photo-count{left:14px;right:auto}
 
 .modal-grid{grid-template-columns:1fr}
 
@@ -731,8 +743,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <div class="hero-note">
 <div><strong id="hero-count">03</strong>Relojes disponibles</div>
-<div><strong>BGA</strong>Envíos locales</div>
-<div><strong>Limitadas</strong>Diseños exclusivos</div>
+<div><strong id="hero-preorder-count">00</strong>Bajo pedido</div>
+<div><strong id="hero-soldout-count">00</strong>Agotados</div>
 </div>
 </div>
 <div class="hero-product" id="hero-product">
@@ -861,6 +873,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2 class="product-name" id="modal-name"></h2>
 <div class="price" id="modal-price"></div>
 <p style="margin-top:15px">Una pieza seleccionada para darle personalidad a tu día. Escríbenos y confirma disponibilidad.</p>
+<div class="modal-note" id="modal-note"></div>
 <span class="specs-label">Ficha técnica</span>
 <ul class="specs" id="modal-specs"></ul>
 <a class="primary-btn wide-btn" id="modal-buy" href="#" target="_blank" rel="noopener">Comprar por WhatsApp · <span id="modal-buy-price"></span></a>
@@ -897,11 +910,15 @@ function waLink(text){return 'https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURI
                   Si agregas más de una, en el detalle del
                   producto aparecen miniaturas para cambiar de foto.)
    - specs      = características
-   - soldOut    = true/false. Ponlo en true cuando se te acabe
-                  el stock de ese producto: no lo borres de la
-                  página, solo se le pone una etiqueta grande de
-                  "Producto agotado" y no se puede comprar hasta
-                  que lo vuelvas a poner en false.
+   - status     = 'disponible' | 'bajo_pedido' | 'agotado'
+                  'disponible' -> se compra normal.
+                  'bajo_pedido' -> se puede comprar, pero se
+                  muestra un aviso de que llega en 2 a 4 días
+                  hábiles y el mensaje de WhatsApp lo aclara.
+                  'agotado' -> no se puede comprar, se le pone
+                  una etiqueta grande y no aparece como pieza
+                  destacada en el inicio. No borres el producto,
+                  solo cambia este valor.
    Para agregar una nueva categoría (ej. 'gafas' o 'gorras'),
    solo agrega productos con ese "category" — el filtro de
    arriba los detecta solo, no hay que tocar nada más.
@@ -914,7 +931,7 @@ label:'Nuevo',
 name:'Patek Philippe — Negro / Plata',
 price:69000,
 priceLabel:'$69.000',
-soldOut:false,
+status:'disponible',
 images:['relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%203.png'],
 specs:[
 'Ideal para momentos casuales',
@@ -931,7 +948,7 @@ label:'Nuevo',
 name:'Patek Philippe — Rosado / Plata',
 price:69000,
 priceLabel:'$69.000',
-soldOut:false,
+status:'disponible',
 images:['relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%203.png'],
 specs:[
 'Ideal para momentos casuales',
@@ -948,7 +965,7 @@ label:'Nuevo',
 name:'Richard Mille — Dorado / Negro',
 price:69000,
 priceLabel:'$69.000',
-soldOut:true,
+status:'agotado',
 images:['relojes/Reloj%20Richard%20Millie%20en%20dorado%20y%20negro%201.png','relojes/Reloj%20Richard%20Millie%20en%20dorado%20y%20negro%202.png','relojes/Reloj%20Richard%20Millie%20en%20dorado%20y%20negro%203.png'],
 specs:[
 'Ideal para uso diario',
@@ -965,7 +982,7 @@ label:'Nuevo',
 name:'Richard Mille — Plata / Rojo',
 price:69000,
 priceLabel:'$69.000',
-soldOut:false,
+status:'disponible',
 images:['relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%201.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%202.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%203.png'],
 specs:[
 'Ideal para uso diario',
@@ -982,7 +999,7 @@ label:'Nuevo',
 name:'Rolex Submariner — Azul / Plata',
 price:99000,
 priceLabel:'$99.000',
-soldOut:false,
+status:'disponible',
 images:['relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%201.png','relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%202.png','relojes/Reloj%20Rolex%20Submariner%20en%20azul%20y%20plata%203.png'],
 specs:[
 'Ideal para ocasiones especiales',
@@ -999,7 +1016,7 @@ label:'Nuevo',
 name:'Rolex Submariner — Verde / Plata',
 price:99000,
 priceLabel:'$99.000',
-soldOut:true,
+status:'agotado',
 images:['relojes/Reloj%20Rolex%20Submariner%20verde%20y%20plata%201.png','relojes/Reloj%20Rolex%20Submariner%20verde%20y%20plata%202.png'],
 specs:[
 'Ideal para ocasiones especiales',
@@ -1036,15 +1053,65 @@ function getVisible(){let list=products.filter(p=>(state.category==='all'||p.cat
 
 function renderFilters(){const categories=[...new Set(products.map(p=>p.category))];const container=el('filters');if(categories.length<=1){container.style.display='none';state.category='all';return}container.style.display='flex';const labels={relojes:'Relojes',gafas:'Gafas',gorras:'Gorras'};container.innerHTML='<button class="filter-chip active" data-filter="all">Todo</button>'+categories.map(c=>'<button class="filter-chip" data-filter="'+c+'">'+(labels[c]||c)+'</button>').join('')}
 
-function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card'+(p.soldOut?' sold-out':'')+'" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span>'+(p.soldOut?'<div class="sold-out-overlay"><span>Producto agotado</span></div>':'<span class="photo-hint">Ver detalle ↗</span>')+'</div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span>'+(p.soldOut?'<span class="buy-btn is-disabled">Agotado</span>':'<a class="buy-btn" href="'+waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')')+'" target="_blank" rel="noopener">Comprar</a>')+'</div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
+function buyBlock(p){
+  if(p.status==='agotado'){
+    return '<span class="buy-btn is-disabled">Agotado</span>';
+  }
+  if(p.status==='bajo_pedido'){
+    const msg='Hola Luna XXI Store, quiero pedir bajo pedido: '+p.name+' ('+p.priceLabel+'). ¿Me confirmas el tiempo de entrega?';
+    return '<a class="buy-btn is-preorder" href="'+waLink(msg)+'" target="_blank" rel="noopener">Pedir</a>';
+  }
+  const msg='Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')';
+  return '<a class="buy-btn" href="'+waLink(msg)+'" target="_blank" rel="noopener">Comprar</a>';
+}
 
-function updateHeroProduct(){const active=products.filter(p=>!p.soldOut);const pool=active.length?active:products;if(!pool.length)return;const featured=pool[Math.floor(Math.random()*pool.length)];el('hero-product-img').src=featured.images[0];el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada'}
-function updateHeroCount(){const heroCount=el('hero-count');if(!heroCount)return;const total=products.length;heroCount.textContent=total<10?'0'+total:String(total)}
+function statusOverlay(p){
+  if(p.status==='agotado')return '<div class="sold-out-overlay"><span>Producto agotado</span></div>';
+  if(p.status==='bajo_pedido')return '<div class="preorder-strip"><span>Disponible bajo pedido · 2-4 días hábiles</span></div>';
+  return '<span class="photo-hint">Ver detalle ↗</span>';
+}
+
+function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card'+(p.status==='agotado'?' sold-out':'')+'" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span>'+statusOverlay(p)+'</div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span>'+buyBlock(p)+'</div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
+
+function updateHeroProduct(){const active=products.filter(p=>p.status!=='agotado');const pool=active.length?active:products;if(!pool.length)return;const featured=pool[Math.floor(Math.random()*pool.length)];el('hero-product-img').src=featured.images[0];el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada'}
+function pad2(n){return n<10?'0'+n:String(n)}
+function updateHeroCount(){const heroCount=el('hero-count');if(!heroCount)return;const available=products.filter(p=>p.status==='disponible').length;const preorder=products.filter(p=>p.status==='bajo_pedido').length;const soldOut=products.filter(p=>p.status==='agotado').length;heroCount.textContent=pad2(available);el('hero-preorder-count').textContent=pad2(preorder);el('hero-soldout-count').textContent=pad2(soldOut)}
 function setCategory(category){state.category=category;document.querySelectorAll('.filter-chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.filter===category));renderProducts();el('coleccion').scrollIntoView({behavior:'smooth',block:'start'})}
 function renderModalImage(){const p=state.modalProduct;if(!p)return;const imgs=p.images;const idx=state.modalIndex;el('modal-img').src=imgs[idx];el('modal-img').alt=p.name+' - foto '+(idx+1);const multi=imgs.length>1;el('modal-prev').style.display=multi?'grid':'none';el('modal-next').style.display=multi?'grid':'none';el('modal-photo-count').style.display=multi?'block':'none';el('modal-photo-count').textContent=(idx+1)+' / '+imgs.length;document.querySelectorAll('.modal-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx))}
 function renderModalThumbs(){const p=state.modalProduct;if(!p)return;const imgs=p.images;const container=el('modal-thumbs');if(imgs.length<=1){container.innerHTML='';container.style.display='none';return}container.style.display='flex';container.innerHTML=imgs.map((src,i)=>'<button class="modal-thumb'+(i===state.modalIndex?' active':'')+'" data-thumb="'+i+'" aria-label="Ver foto '+(i+1)+'"><img src="'+src+'" alt=""></button>').join('')}
 function goModalImage(step){const p=state.modalProduct;if(!p)return;const total=p.images.length;state.modalIndex=(state.modalIndex+step+total)%total;renderModalImage()}
-function openModal(id){const p=products.find(item=>item.id===Number(id));if(!p)return;state.modalProduct=p;state.modalIndex=0;renderModalImage();renderModalThumbs();el('modal-category').textContent=p.category+' · '+p.label+(p.soldOut?' · Agotado':'');el('modal-name').textContent=p.name;el('modal-price').textContent=p.priceLabel;el('modal-specs').innerHTML=p.specs.map(s=>'<li>'+s+'</li>').join('');if(p.soldOut){el('modal-buy').classList.add('is-disabled');el('modal-buy').removeAttribute('href');el('modal-buy-price').textContent='Producto agotado'}else{el('modal-buy').classList.remove('is-disabled');el('modal-buy').href=waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')');el('modal-buy-price').textContent=p.priceLabel}el('product-modal').classList.add('open');el('modal-backdrop').classList.add('open')}
+function openModal(id){
+  const p=products.find(item=>item.id===Number(id));if(!p)return;
+  state.modalProduct=p;state.modalIndex=0;renderModalImage();renderModalThumbs();
+  const statusSuffix=p.status==='agotado'?' · Agotado':(p.status==='bajo_pedido'?' · Bajo pedido':'');
+  el('modal-category').textContent=p.category+' · '+p.label+statusSuffix;
+  el('modal-name').textContent=p.name;
+  el('modal-price').textContent=p.priceLabel;
+  el('modal-specs').innerHTML=p.specs.map(s=>'<li>'+s+'</li>').join('');
+  const note=el('modal-note');
+  const buy=el('modal-buy');
+  if(p.status==='agotado'){
+    note.style.display='none';
+    buy.classList.add('is-disabled');
+    buy.classList.remove('is-preorder');
+    buy.removeAttribute('href');
+    el('modal-buy-price').textContent='Producto agotado';
+  }else if(p.status==='bajo_pedido'){
+    note.style.display='block';
+    note.textContent='Este producto está disponible bajo pedido: llega en 2 a 4 días hábiles después de confirmar tu compra.';
+    buy.classList.remove('is-disabled');
+    buy.classList.add('is-preorder');
+    buy.href=waLink('Hola Luna XXI Store, quiero pedir bajo pedido: '+p.name+' ('+p.priceLabel+'). ¿Me confirmas el tiempo de entrega?');
+    el('modal-buy-price').textContent=p.priceLabel;
+  }else{
+    note.style.display='none';
+    buy.classList.remove('is-disabled');
+    buy.classList.remove('is-preorder');
+    buy.href=waLink('Hola Luna XXI Store, quiero comprar: '+p.name+' ('+p.priceLabel+')');
+    el('modal-buy-price').textContent=p.priceLabel;
+  }
+  el('product-modal').classList.add('open');el('modal-backdrop').classList.add('open')
+}
 
 function closeModal(){el('product-modal').classList.remove('open');el('modal-backdrop').classList.remove('open')}
 function showToast(message){const toast=el('toast');toast.textContent=message;toast.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>toast.classList.remove('show'),2500)}
