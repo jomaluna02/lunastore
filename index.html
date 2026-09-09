@@ -178,6 +178,22 @@ select{border:1px solid var(--line);border-radius:999px;background:var(--surface
 
 .results-line{color:var(--muted);font-size:.72rem;margin:-10px 0 20px}
 
+.catalog-group{margin-bottom:44px}
+
+.catalog-group:last-child{margin-bottom:0}
+
+.catalog-subheading{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:1.05rem;letter-spacing:-.01em;margin-bottom:16px;color:var(--white)}
+
+.status-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+
+.dot-disponible{background:var(--silver)}
+
+.dot-bajo_pedido{background:transparent;border:1.5px solid var(--silver)}
+
+.dot-agotado{background:var(--muted)}
+
+.catalog-count{color:var(--muted);font-size:.72rem;font-weight:500;font-family:'DM Sans',Arial,sans-serif}
+
 .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 
 .product-card{position:relative;background:linear-gradient(145deg,var(--surface-2),var(--surface));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.35s;animation:rise .55s both}
@@ -794,14 +810,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <input id="search" type="search" placeholder="Buscar producto..." aria-label="Buscar producto">
 </label>
 <select id="sort" aria-label="Ordenar productos">
-<option value="featured">Destacados</option>
+<option value="">Ordenar</option>
 <option value="low">Menor precio</option>
 <option value="high">Mayor precio</option>
 </select>
 </div>
 </div>
 <p class="results-line" id="results-line"></p>
-<div class="product-grid" id="product-grid"></div>
+<div id="catalog-sections">
+<div class="catalog-group" id="group-disponible">
+<h3 class="catalog-subheading"><span class="status-dot dot-disponible"></span>Disponibles<span class="catalog-count" id="count-disponible"></span></h3>
+<div class="product-grid" id="grid-disponible"></div>
+</div>
+<div class="catalog-group" id="group-bajo_pedido">
+<h3 class="catalog-subheading"><span class="status-dot dot-bajo_pedido"></span>Bajo pedido<span class="catalog-count" id="count-bajo_pedido"></span></h3>
+<div class="product-grid" id="grid-bajo_pedido"></div>
+</div>
+<div class="catalog-group" id="group-agotado">
+<h3 class="catalog-subheading"><span class="status-dot dot-agotado"></span>Agotados<span class="catalog-count" id="count-agotado"></span></h3>
+<div class="product-grid" id="grid-agotado"></div>
+</div>
+</div>
+<div class="empty-state" id="empty-state" style="display:none"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>
 </section>
 
 <!-- =====================================================
@@ -927,11 +957,11 @@ const products=[
 {
 id:201,
 category:'relojes',
-label:'Destacado',
+label:'Nuevo',
 name:'Patek Philippe — Negro / Plata',
 price:69000,
 priceLabel:'$69.000',
-status:'disponible',
+status:'bajo_pedido',
 images:['relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20negro%20y%20plata%203.png'],
 specs:[
 'Ideal para momentos casuales',
@@ -948,7 +978,7 @@ label:'Nuevo',
 name:'Patek Philippe — Rosado / Plata',
 price:69000,
 priceLabel:'$69.000',
-status:'disponible',
+status:'bajo_pedido',
 images:['relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%202.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%201.png','relojes/Reloj%20Patek%20Philippe%20en%20rosado%20y%20plata%203.png'],
 specs:[
 'Ideal para momentos casuales',
@@ -961,6 +991,7 @@ specs:[
 {
 id:203,
 category:'relojes',
+label:'Nuevo',
 name:'Richard Mille — Dorado / Negro',
 price:69000,
 priceLabel:'$69.000',
@@ -981,8 +1012,8 @@ label:'Nuevo',
 name:'Richard Mille — Plata / Rojo',
 price:69000,
 priceLabel:'$69.000',
-status:'disponible',
-images:['relojes/Reloj Richard Millie en plata y rojo 1.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%202.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%203.png'],
+status:'bajo_pedido',
+images:['relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%201.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%202.png','relojes/Reloj%20Richard%20Millie%20en%20plata%20y%20rojo%203.png'],
 specs:[
 'Ideal para uso diario',
 'Paleta de colores plata y rojo',
@@ -994,7 +1025,7 @@ specs:[
 {
 id:205,
 category:'relojes',
-label:'Destacado',
+label:'Nuevo',
 name:'Rolex Submariner — Azul / Plata',
 price:99000,
 priceLabel:'$99.000',
@@ -1011,6 +1042,7 @@ specs:[
 {
 id:206,
 category:'relojes',
+label:'Nuevo',
 name:'Rolex Submariner — Verde / Plata',
 price:99000,
 priceLabel:'$99.000',
@@ -1043,7 +1075,7 @@ specs:[
 /* =========================================================
    12. ESTADO DE LA PÁGINA
    ========================================================= */
-const state={category:'all',query:'',sort:'featured',modalProduct:null,modalIndex:0};
+const state={category:'all',query:'',sort:'',modalProduct:null,modalIndex:0};
 
 const el=id=>document.getElementById(id);
 
@@ -1069,7 +1101,27 @@ function statusOverlay(p){
   return '<span class="photo-hint">Ver detalle ↗</span>';
 }
 
-function renderProducts(){const list=getVisible();el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');el('product-grid').innerHTML=list.length?list.map((p,i)=>'<article class="product-card'+(p.status==='agotado'?' sold-out':'')+'" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span>'+statusOverlay(p)+'</div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span>'+buyBlock(p)+'</div></div></article>').join(''):'<div class="empty-state"><strong>No encontramos esa pieza.</strong>Prueba con otro nombre o vuelve a ver toda la colección.</div>'}
+function cardHtml(p,i){return '<article class="product-card'+(p.status==='agotado'?' sold-out':'')+'" style="animation-delay:'+i*.08+'s"><div class="product-media" data-quick="'+p.id+'" role="button" tabindex="0" aria-label="Ver detalles de '+p.name+'"><img src="'+p.images[0]+'" alt="'+p.name+'" loading="lazy"><span class="product-badge">'+p.label+'</span>'+statusOverlay(p)+'</div><div class="product-info"><div class="product-meta"><span>'+p.category+'</span><span>XXI / 0'+(i+1)+'</span></div><h3 class="product-name">'+p.name+'</h3><div class="product-bottom"><span class="price">'+p.priceLabel+'</span>'+buyBlock(p)+'</div></div></article>'}
+
+function renderProducts(){
+  const list=getVisible();
+  el('results-line').textContent=list.length+' '+(list.length===1?'producto visible':'productos visibles');
+  const groups={disponible:[],bajo_pedido:[],agotado:[]};
+  list.forEach(p=>{if(groups[p.status])groups[p.status].push(p)});
+  const order=['disponible','bajo_pedido','agotado'];
+  let anyVisible=false;
+  order.forEach(key=>{
+    const arr=groups[key];
+    const groupEl=el('group-'+key);
+    if(!arr.length){groupEl.style.display='none';return}
+    anyVisible=true;
+    groupEl.style.display='block';
+    el('count-'+key).textContent=' · '+arr.length;
+    el('grid-'+key).innerHTML=arr.map((p,i)=>cardHtml(p,i)).join('');
+  });
+  el('catalog-sections').style.display=anyVisible?'block':'none';
+  el('empty-state').style.display=anyVisible?'none':'block';
+}
 
 function updateHeroProduct(){const active=products.filter(p=>p.status!=='agotado');const pool=active.length?active:products;if(!pool.length)return;const featured=pool[Math.floor(Math.random()*pool.length)];el('hero-product-img').src=featured.images[0];el('hero-product-img').alt=featured.name;el('hero-product-label').textContent='Pieza destacada'}
 function pad2(n){return n<10?'0'+n:String(n)}
