@@ -6,7 +6,7 @@ on:
 
 jobs:
   update-products:
-    if: ${{ !contains(github.event.head_commit.message, 'Añadir 6 nuevos relojes') }}
+    if: ${{ !contains(github.event.head_commit.message, 'Corregir bloque de productos nuevos') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Agregar productos
+      - name: Corregir productos
         shell: python
         run: |
           from pathlib import Path
@@ -23,7 +23,11 @@ jobs:
           path = Path('index.html')
           text = path.read_text(encoding='utf-8')
 
-          new_products = r'''\
+          if 'id:207' in text:
+              text = text.replace("\n\\\n{\nid:207", "\n{\nid:207", 1)
+              path.write_text(text, encoding='utf-8')
+          else:
+              new_products = r'''\
           {
           id:207,
           category:'relojes',
@@ -33,13 +37,7 @@ jobs:
           priceLabel:'$109.000',
           status:'disponible',
           images:['relojes/Rolex%20Land-Dweller%20Plata-Dorado%201.png','relojes/Rolex%20Land-Dweller%20Plata-Dorado%202.png','relojes/Rolex%20Land-Dweller%20Plata-Dorado%203.png'],
-          specs:[
-          'Diseño inspirado en la línea Land-Dweller',
-          'Caja de referencia de 40 mm',
-          'Bisel estriado',
-          'Indicador de fecha con lente tipo Cyclops',
-          'Brazalete de estilo Flat Jubilee'
-          ]
+          specs:['Diseño inspirado en la línea Land-Dweller','Caja de referencia de 40 mm','Bisel estriado','Indicador de fecha con lente tipo Cyclops','Brazalete de estilo Flat Jubilee']
           },
           {
           id:208,
@@ -50,13 +48,7 @@ jobs:
           priceLabel:'$119.000',
           status:'disponible',
           images:['relojes/Rolex%20President%20Day%20Date%20Dorado-Plata%201.png','relojes/Rolex%20President%20Day%20Date%20Dorado-Plata%202.png','relojes/Rolex%20President%20Day%20Date%20Dorado%20Plata%203.png'],
-          specs:[
-          'Diseño clásico Day-Date',
-          'Brazalete de estilo President',
-          'Bisel estriado',
-          'Visualización de día y fecha',
-          'Cristal de referencia tipo zafiro con lente Cyclops'
-          ]
+          specs:['Diseño clásico Day-Date','Brazalete de estilo President','Bisel estriado','Visualización de día y fecha','Cristal de referencia tipo zafiro con lente Cyclops']
           },
           {
           id:209,
@@ -67,13 +59,7 @@ jobs:
           priceLabel:'$119.000',
           status:'disponible',
           images:['relojes/Rolex%20President%20Day%20Date%20Negro%201.png','relojes/Rolex%20President%20Day%20Date%20Negro%202.png','relojes/Rolex%20President%20Day%20Date%20Negro%203.png'],
-          specs:[
-          'Esfera negra de estilo clásico',
-          'Diseño Day-Date',
-          'Brazalete de estilo President',
-          'Bisel estriado',
-          'Visualización de día y fecha'
-          ]
+          specs:['Esfera negra de estilo clásico','Diseño Day-Date','Brazalete de estilo President','Bisel estriado','Visualización de día y fecha']
           },
           {
           id:210,
@@ -84,13 +70,7 @@ jobs:
           priceLabel:'$1.090.000',
           status:'disponible',
           images:['relojes/Rolex%20Submariner%20Verde-Plata-Dorado%201.png','relojes/Rolex%20Submariner%20Verde-Plata-Dorado%202.png','relojes/Rolex%20Submariner%20Verde-Plata-Dorado%203.png'],
-          specs:[
-          'Diseño inspirado en la línea Submariner',
-          'Caja de referencia de 41 mm',
-          'Bisel giratorio unidireccional',
-          'Bisel verde de estilo Cerachrom',
-          'Diseño de alta legibilidad para el uso diario'
-          ]
+          specs:['Diseño inspirado en la línea Submariner','Caja de referencia de 41 mm','Bisel giratorio unidireccional','Bisel verde de estilo Cerachrom','Diseño de alta legibilidad para el uso diario']
           },
           {
           id:211,
@@ -101,13 +81,7 @@ jobs:
           priceLabel:'$99.000',
           status:'disponible',
           images:['relojes/Technomarine%20Black%20Reef%20Negro-Dorado%201.png','relojes/Technomarine%20Black%20Reef%20Negro-Dorado%202.png','relojes/Technomarine%20Black%20Reef%20Negro-Dorado%203.png'],
-          specs:[
-          'Diseño Black Reef',
-          'Combinación de acabados negro y dorado',
-          'Estética deportiva y robusta',
-          'Diseño pensado para uso diario',
-          'Esfera de alta presencia visual'
-          ]
+          specs:['Diseño Black Reef','Combinación de acabados negro y dorado','Estética deportiva y robusta','Diseño pensado para uso diario','Esfera de alta presencia visual']
           },
           {
           id:212,
@@ -118,32 +92,20 @@ jobs:
           priceLabel:'$69.000',
           status:'disponible',
           images:['relojes/Patek%20Phillipe%20Dorado-Plata%201.png','relojes/Patek%20Phillipe%20Dorado-Plata%202.png','relojes/Patek%20Phillipe%20Dorado-Plata%203.png'],
-          specs:[
-          'Diseño clásico en tonos dorado y plata',
-          'Acabado metálico de estilo elegante',
-          'Esfera de diseño clásico',
-          'Brazalete metálico',
-          'Versátil para ocasiones casuales y formales'
-          ]
+          specs:['Diseño clásico en tonos dorado y plata','Acabado metálico de estilo elegante','Esfera de diseño clásico','Brazalete metálico','Versátil para ocasiones casuales y formales']
           }'''
-
-          pattern = r"(const products=\[.*?)(\n\];)"
-          match = re.search(pattern, text, re.S)
-          if not match:
-              raise SystemExit('No se encontró el bloque de productos')
-
-          existing = match.group(1)
-          if 'id:207' in existing:
-              raise SystemExit('Los productos ya están agregados')
-
-          updated = existing + ',\n' + new_products + match.group(2)
-          text = text[:match.start(1)] + updated + text[match.end(2):]
-          path.write_text(text, encoding='utf-8')
+              pattern = r"(const products=\[.*?)(\n\];)"
+              match = re.search(pattern, text, re.S)
+              if not match:
+                  raise SystemExit('No se encontró el bloque de productos')
+              updated = match.group(1) + ',\n' + new_products + match.group(2)
+              text = text[:match.start(1)] + updated + text[match.end(2):]
+              path.write_text(text, encoding='utf-8')
 
       - name: Publicar cambios
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Añadir 6 nuevos relojes" || exit 0
+          git commit -m "Corregir productos nuevos" || exit 0
           git push
