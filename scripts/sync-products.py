@@ -13,23 +13,40 @@ def price_label(price):
 def main():
     data = json.loads(DATA_FILE.read_text(encoding="utf-8"))
     products = data.get("products", [])
+
     for product in products:
         product["priceLabel"] = price_label(product.get("price", 0))
 
     index = INDEX_FILE.read_text(encoding="utf-8")
-    generated = "window.LUNA_PRODUCTS = " + json.dumps(products, ensure_ascii=False, indent=2) + ";"
-    pattern = re.compile(r"window\.LUNA_PRODUCTS\s*=\s*\[.*?\];", re.DOTALL)
-    if pattern.search(index):
-        updated = pattern.sub(generated, index, count=1)
+    generated = "const products = " + json.dumps(products, ensure_ascii=False, indent=2) + ";"
+
+    # Corrige la versión anterior que insertaba un <script> dentro del <script> principal.
+    malformed = re.compile(
+        r"<script>\s*window\.LUNA_PRODUCTS\s*=\s*\[.*?\];\s*</script>\s*const products\s*=\s*window\.LUNA_PRODUCTS\s*\|\|\s*\[\];",
+        re.DOTALL,
+    )
+    if malformed.search(index):
+        updated = malformed.sub(generated, index, count=1)
     else:
-        legacy = re.compile(r"const products\s*=\s*\[.*?\n\];", re.DOTALL)
-        updated, count = legacy.subn("const products = window.LUNA_PRODUCTS || [];", index, count=1)
-        if count != 1:
-            raise SystemExit("No se encontró el bloque de productos en index.html")
-        declaration = "const products = window.LUNA_PRODUCTS || [];"
-        pos = updated.find(declaration)
-        script = "<script>\n" + generated + "\n</script>\n"
-        updated = updated[:pos] + script + updated[pos:]
+        # Si ya existe una declaración generada, reemplázala directamente dentro del script existente.
+        generated_window = re.compile(
+            r"window\.LUNA_PRODUCTS\s*=\s*\[.*?\];\s*",
+            re.DOTALL,
+        )
+        if generated_window.search(index):
+            updated = generated_window.sub("", index, count=1)
+            legacy_window = re.compile(
+                r"const products\s*=\s*window\.LUNA_PRODUCTS\s*\|\|\s*\[\];",
+                re.DOTALL,
+            )
+            updated, count = legacy_window.subn(generated, updated, count=1)
+            if count != 1:
+                raise SystemExit("No se encontró la declaración de productos para reemplazar")
+        else:
+            legacy = re.compile(r"const products\s*=\s*\[.*?\n\];", re.DOTALL)
+            updated, count = legacy.subn(generated, index, count=1)
+            if count != 1:
+                raise SystemExit("No se encontró el bloque de productos en index.html")
 
     if updated != index:
         INDEX_FILE.write_text(updated, encoding="utf-8")
