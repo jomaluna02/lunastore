@@ -20,7 +20,7 @@ def main():
     index = INDEX_FILE.read_text(encoding="utf-8")
     generated = "const products = " + json.dumps(products, ensure_ascii=False, indent=2) + ";"
 
-    # Corrige la versión anterior que insertaba un <script> dentro del <script> principal.
+    # Repara la versión que insertaba un <script> dentro del <script> principal.
     malformed = re.compile(
         r"<script>\s*window\.LUNA_PRODUCTS\s*=\s*\[.*?\];\s*</script>\s*const products\s*=\s*window\.LUNA_PRODUCTS\s*\|\|\s*\[\];",
         re.DOTALL,
@@ -28,17 +28,10 @@ def main():
     if malformed.search(index):
         updated = malformed.sub(generated, index, count=1)
     else:
-        # Si ya existe una declaración generada, reemplázala directamente dentro del script existente.
-        generated_window = re.compile(
-            r"window\.LUNA_PRODUCTS\s*=\s*\[.*?\];\s*",
-            re.DOTALL,
-        )
+        generated_window = re.compile(r"window\.LUNA_PRODUCTS\s*=\s*\[.*?\];\s*", re.DOTALL)
         if generated_window.search(index):
             updated = generated_window.sub("", index, count=1)
-            legacy_window = re.compile(
-                r"const products\s*=\s*window\.LUNA_PRODUCTS\s*\|\|\s*\[\];",
-                re.DOTALL,
-            )
+            legacy_window = re.compile(r"const products\s*=\s*window\.LUNA_PRODUCTS\s*\|\|\s*\[\];")
             updated, count = legacy_window.subn(generated, updated, count=1)
             if count != 1:
                 raise SystemExit("No se encontró la declaración de productos para reemplazar")
