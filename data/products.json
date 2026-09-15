@@ -125,7 +125,7 @@
       "label": "Nuevo",
       "name": "Rolex Land-Dweller — Plata / Dorado",
       "price": 109000,
-      "status": "disponible",
+      "status": "bajo_pedido",
       "images": [
         "relojes/Rolex%20Land-Dweller%20Plata-Dorado%201.png",
         "relojes/Rolex%20Land-Dweller%20Plata-Dorado%202.png",
@@ -206,7 +206,7 @@
       "label": "Nuevo",
       "name": "Technomarine Black Reef — Negro / Dorado",
       "price": 99000,
-      "status": "disponible",
+      "status": "bajo_pedido",
       "images": [
         "relojes/Technomarine%20Black%20Reef%20Negro-Dorado%201.png",
         "relojes/Technomarine%20Black%20Reef%20Negro-Dorado%202.png",
