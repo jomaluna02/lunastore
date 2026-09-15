@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: jomaluna02/lunastore
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: /auth
+
+media_folder: "relojes"
+public_folder: "/lunastore/relojes"
+
+collections:
+  - name: "productos"
+    label: "Productos"
+    label_singular: "Producto"
+    description: "Administra los productos de LUNA XXI Store sin tocar el código."
+    files:
+      - label: "Catálogo"
+        name: "catalogo"
+        file: "data/products.json"
+        format: "json"
+        fields:
+          - label: "Productos"
+            name: "products"
+            widget: "list"
+            summary: "{{fields.name}} · ${{fields.price}} · {{fields.status}}"
+            fields:
+              - {label: "ID", name: "id", widget: "number", value_type: "int", hint: "Identificador único. No repitas IDs."}
+              - {label: "Categoría", name: "category", widget: "select", options: ["relojes", "gafas", "gorras", "bolsas"]}
+              - {label: "Etiqueta", name: "label", widget: "string", default: "Nuevo"}
+              - {label: "Nombre", name: "name", widget: "string"}
+              - {label: "Precio", name: "price", widget: "number", value_type: "int", min: 0}
+              - {label: "Estado", name: "status", widget: "select", options: ["disponible", "bajo_pedido", "agotado"], default: "disponible"}
+              - label: "Fotos"
+                name: "images"
+                widget: "list"
+                field: {label: "Foto", name: "image", widget: "image", choose_url: false}
+              - label: "Características"
+                name: "specs"
+                widget: "list"
+                field: {label: "Característica", name: "spec", widget: "string"}
