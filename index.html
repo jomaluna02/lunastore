@@ -1027,8 +1027,7 @@ function waLink(text){return 'https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURI
    solo agrega productos con ese "category" — el filtro de
    arriba los detecta solo, no hay que tocar nada más.
    ========================================================= */
-<script>
-window.LUNA_PRODUCTS = [
+const products = [
   {
     "id": 201,
     "category": "relojes",
@@ -1283,8 +1282,6 @@ window.LUNA_PRODUCTS = [
     "priceLabel": "$69.000"
   }
 ];
-</script>
-const products = window.LUNA_PRODUCTS || [];
 
 /* =========================================================
    11. CATEGORÍAS FUTURAS (no activo por ahora)
