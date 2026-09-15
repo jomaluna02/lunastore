@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - data/products.json
+      - scripts/sync-products.py
 
 permissions:
   contents: write
@@ -28,6 +29,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No hay cambios que guardar."
           else
-            git commit -m "Sincroniza catálogo desde CMS"
+            git commit -m "Corrige sincronización del catálogo"
             git push
           fi
