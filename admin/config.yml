@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: jomaluna02/lunastore
+  name: git-gateway
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: /auth
 
 media_folder: "relojes"
 public_folder: "/lunastore/relojes"
