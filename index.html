@@ -579,15 +579,13 @@ h1{font-size:clamp(3.1rem,17vw,5.3rem)}
 
 /* 1. Scroll reveal */
 .reveal{
-  opacity:0;
-  transform:translateY(26px);
-  transition:
-    opacity .72s cubic-bezier(.22,1,.36,1),
-    transform .72s cubic-bezier(.22,1,.36,1);
+  opacity:1 !important;
+  transform:none !important;
+  transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);
 }
 .reveal.visible{
-  opacity:1;
-  transform:none;
+  opacity:1 !important;
+  transform:none !important;
 }
 
 /* 2. Entrada del Hero */
